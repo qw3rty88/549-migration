@@ -105,9 +105,12 @@
     border-radius:inherit;
     pointer-events:none;
     z-index:-1;
-    opacity:.05;
+    opacity:.09;
     mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cg stroke='%23000000' stroke-width='0.9' opacity='0.4'%3E%3Cline x1='22' y1='42' x2='97' y2='19'/%3E%3Cline x1='131' y1='69' x2='206' y2='47'/%3E%3Cline x1='33' y1='129' x2='103' y2='167'/%3E%3Cline x1='153' y1='158' x2='212' y2='196'/%3E%3Cline x1='63' y1='197' x2='143' y2='177'/%3E%3Cline x1='8' y1='177' x2='53' y2='147'/%3E%3C/g%3E%3Cg stroke='%23ffffff' stroke-width='0.6' opacity='0.55'%3E%3Cline x1='10' y1='30' x2='90' y2='10'/%3E%3Cline x1='120' y1='60' x2='200' y2='40'/%3E%3Cline x1='30' y1='120' x2='100' y2='160'/%3E%3Cline x1='150' y1='150' x2='210' y2='190'/%3E%3Cline x1='60' y1='190' x2='140' y2='170'/%3E%3Cline x1='5' y1='170' x2='50' y2='140'/%3E%3Cline x1='95' y1='80' x2='175' y2='95'/%3E%3Cline x1='40' y1='60' x2='75' y2='95'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:220px 220px, 140px 140px;
   }
 
   /* genuine gradient (bronze/amber-to-ice) border ring instead of a flat single-color line */
@@ -130,6 +133,39 @@
       linear-gradient(135deg, #7dd8e8 0%, #3a4451 35%, #16202b 55%, #5fc9dd 80%, #cdeff5 100%);
     box-shadow:0 0 0 1px rgba(0,240,255,.1), 0 0 30px rgba(0,200,255,.12), inset 0 0 40px rgba(0,0,0,.35);
   }
+
+  /* lighter-weight gradient borders for the small repeated cards (feature/chieftain),
+     kept translucent (not a solid dark fill like the big panels) + pulse on hover */
+  .card-border-amber{
+    border:1px solid transparent;
+    background-clip:padding-box, border-box;
+    background-origin:padding-box, border-box;
+    background-image:
+      linear-gradient(rgba(17,15,12,.78), rgba(17,15,12,.78)),
+      linear-gradient(135deg, #ffcc66 0%, #ff9a2e 35%, #7a4a1a 60%, #ffaa00 85%, #fff0cc 100%);
+    box-shadow:0 0 0 1px rgba(255,170,0,.14), 0 0 16px rgba(255,140,0,.16);
+    transition:transform .25s ease, box-shadow .3s ease;
+  }
+  .card-border-ice{
+    border:1px solid transparent;
+    background-clip:padding-box, border-box;
+    background-origin:padding-box, border-box;
+    background-image:
+      linear-gradient(rgba(12,16,20,.78), rgba(12,16,20,.78)),
+      linear-gradient(135deg, #7dd8e8 0%, #3a4451 35%, #16202b 55%, #5fc9dd 80%, #cdeff5 100%);
+    box-shadow:0 0 0 1px rgba(0,240,255,.12), 0 0 16px rgba(0,200,255,.14);
+    transition:transform .25s ease, box-shadow .3s ease;
+  }
+  @keyframes pulseGlowAmber{
+    0%,100%{ box-shadow:0 0 0 1px rgba(255,170,0,.2), 0 0 16px rgba(255,140,0,.22); }
+    50%{ box-shadow:0 0 0 1px rgba(255,170,0,.55), 0 0 34px rgba(255,140,0,.5); }
+  }
+  @keyframes pulseGlowIce{
+    0%,100%{ box-shadow:0 0 0 1px rgba(0,240,255,.16), 0 0 16px rgba(0,200,255,.2); }
+    50%{ box-shadow:0 0 0 1px rgba(0,240,255,.5), 0 0 34px rgba(0,200,255,.45); }
+  }
+  .card-border-amber:hover{ animation:pulseGlowAmber 1.5s ease-in-out infinite; }
+  .card-border-ice:hover{ animation:pulseGlowIce 1.5s ease-in-out infinite; }
 
   /* neon-outlined custom Viking icons */
   .icon-neon{width:1.35rem; height:1.35rem; flex-shrink:0;}
@@ -264,22 +300,22 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5" id="tilt-grid">
-        <div class="tilt-card rounded-2xl border border-ice/15 bg-white/5 backdrop-blur-lg p-6 shadow-[0_0_18px_rgba(0,240,255,.08)] hover:border-ice/40 hover:shadow-glow-ice">
+        <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="shield" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
           <p class="font-semibold text-fg">Справедливое распределение наград</p>
           <p class="text-fg-muted text-sm mt-2">Адекватный совет сервера и прозрачная система управления.</p>
         </div>
-        <div class="tilt-card rounded-2xl border border-ice/15 bg-white/5 backdrop-blur-lg p-6 shadow-[0_0_18px_rgba(0,240,255,.08)] hover:border-ice/40 hover:shadow-glow-ice">
+        <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="swords" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
           <p class="font-semibold text-fg">Активный KVK и PvP</p>
           <p class="text-fg-muted text-sm mt-2">Никакого афк — регулярные войны и защита союзников.</p>
         </div>
-        <div class="tilt-card rounded-2xl border border-ice/15 bg-white/5 backdrop-blur-lg p-6 shadow-[0_0_18px_rgba(0,240,255,.08)] hover:border-ice/40 hover:shadow-glow-ice">
+        <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="heart-handshake" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
           <p class="font-semibold text-fg">Поддержка при переходе</p>
           <p class="text-fg-muted text-sm mt-2">Помогаем топ-альянсам и соло-бойцам адаптироваться на новом месте.</p>
         </div>
-        <div class="tilt-card rounded-2xl border border-ice/15 bg-white/5 backdrop-blur-lg p-6 shadow-[0_0_18px_rgba(0,240,255,.08)] hover:border-ice/40 hover:shadow-glow-ice">
+        <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="scroll-text" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
           <p class="font-semibold text-fg">Чёткие правила сервера</p>
           <p class="text-fg-muted text-sm mt-2">Запрет на внутренний грабёж и бессмысленный зерг клиринг.</p>
@@ -382,7 +418,7 @@
       <p class="text-fg-muted mt-4 max-w-xl mx-auto">Свяжитесь напрямую — они ведут приём заявок и координируют миграцию.</p>
 
       <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="group rounded-2xl border border-amber/20 bg-white/5 backdrop-blur-lg p-8 shadow-[0_0_18px_rgba(255,170,0,.08)] hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+        <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="group glass-panel card-border-amber rounded-2xl p-8 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
           <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-ice/20 to-ember/20 border border-white/10 flex items-center justify-center mb-4">
             <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
           </div>
@@ -390,7 +426,7 @@
           <div class="text-xs uppercase tracking-widest text-amber mt-1">Хёвдинг · Приём заявок</div>
           <div class="text-ice text-sm mt-3 inline-flex items-center gap-1.5 group-hover:underline"><i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>@Keypoint21</div>
         </a>
-        <a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="group rounded-2xl border border-amber/20 bg-white/5 backdrop-blur-lg p-8 shadow-[0_0_18px_rgba(255,170,0,.08)] hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+        <a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="group glass-panel card-border-amber rounded-2xl p-8 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
           <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-ice/20 to-ember/20 border border-white/10 flex items-center justify-center mb-4">
             <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
           </div>
