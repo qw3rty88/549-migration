@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>549 · Миграция — вступи в клан</title>
-<meta name="description" content="549 · Миграция — живое сообщество, прозрачное руководство и голосовые чаты для координации. Подай заявку на миграцию в 549.">
+<title>K549 | MIGRATION — переходи на кингдом #549</title>
+<meta name="description" content="K549 · Migration — неофициальный фан-сайт сообщества кингдома #549 в Viking Rise. Сильный сервер, активные KVK, чёткая стратегия. Подай заявку на миграцию.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -16,34 +16,35 @@
     theme: {
       extend: {
         colors: {
-          charcoal: '#0d0e12',
-          'charcoal-deep': '#090a0f',
-          ice: '#3fd8ff',
+          charcoal: '#0b0c10',
+          'charcoal-deep': '#07080b',
+          ice: '#00f0ff',
           ember: '#ff5500',
           amber: '#ffaa00',
-          fg: '#e6e9ef',
-          'fg-muted': '#9aa3b2',
+          fg: '#e9ecf2',
+          'fg-muted': '#98a1b0',
         },
         fontFamily: {
           display: ['Cinzel', 'serif'],
+          stat: ['Rajdhani', 'sans-serif'],
           sans: ['Inter', 'sans-serif'],
         },
         boxShadow: {
-          'glow-ice': '0 0 26px rgba(63,216,255,.4)',
-          'glow-ember': '0 0 30px rgba(255,85,0,.55)',
+          'glow-ice': '0 0 28px rgba(0,240,255,.35)',
+          'glow-ember': '0 0 32px rgba(255,85,0,.55)',
         },
         keyframes: {
           pulseBorder: {
-            '0%,100%': { boxShadow: '0 0 0 1px rgba(63,216,255,.3), 0 0 18px rgba(63,216,255,.25)' },
-            '50%':     { boxShadow: '0 0 0 1px rgba(63,216,255,.6), 0 0 30px rgba(63,216,255,.5)' },
+            '0%,100%': { boxShadow: '0 0 0 1px rgba(255,170,0,.35), 0 0 20px rgba(255,170,0,.25)' },
+            '50%':     { boxShadow: '0 0 0 1px rgba(255,170,0,.7), 0 0 34px rgba(255,140,0,.55)' },
           },
           emberPulse: {
             '0%,100%': { boxShadow: '0 0 18px rgba(255,85,0,.45)' },
-            '50%':     { boxShadow: '0 0 34px rgba(255,120,20,.75)' },
+            '50%':     { boxShadow: '0 0 36px rgba(255,120,20,.8)' },
           },
         },
         animation: {
-          'pulse-border': 'pulseBorder 2.4s ease-in-out infinite',
+          'pulse-border': 'pulseBorder 2.6s ease-in-out infinite',
           'ember-pulse': 'emberPulse 2.2s ease-in-out infinite',
         },
       },
@@ -57,42 +58,63 @@
   html{scroll-behavior:smooth;}
   body{font-family:'Inter',sans-serif;}
   .font-display{font-family:'Cinzel',serif;}
+  .font-stat{font-family:'Rajdhani',sans-serif;}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *, *::before, *::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
   }
-  .tilt-card{transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease; transform-style:preserve-3d; will-change:transform;}
-  ::selection{background:rgba(63,216,255,.3); color:#fff;}
+
+  /* brushed-metal embossed headline text */
+  .text-metal{
+    background-image:linear-gradient(180deg,#ffffff 0%,#d6dae1 22%,#7d8492 46%,#aeb4bf 64%,#f4f6f9 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 3px 3px rgba(0,0,0,.85)) drop-shadow(0 -1px 0 rgba(255,255,255,.12));
+  }
+
+  /* small rune-tick brackets flanking buttons / inputs, pure CSS (no markup needed) */
+  .rune-framed{
+    background-repeat:no-repeat, no-repeat;
+    background-position:left center, right center;
+    background-size:7px 22px, 7px 22px;
+    padding-left:1.5rem; padding-right:1.5rem;
+  }
+  .rune-framed-amber{
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 28'%3E%3Cpath d='M8 3 L3 3 L3 25 L8 25' fill='none' stroke='%23ffaa00' stroke-width='1.6'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 28'%3E%3Cpath d='M2 3 L7 3 L7 25 L2 25' fill='none' stroke='%23ffaa00' stroke-width='1.6'/%3E%3C/svg%3E");
+  }
+  .rune-framed-ice{
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 28'%3E%3Cpath d='M8 3 L3 3 L3 25 L8 25' fill='none' stroke='%2300f0ff' stroke-width='1.4' opacity='.55'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 28'%3E%3Cpath d='M2 3 L7 3 L7 25 L2 25' fill='none' stroke='%2300f0ff' stroke-width='1.4' opacity='.55'/%3E%3C/svg%3E");
+  }
+
+  .tilt-card{transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease; will-change:transform;}
+  ::selection{background:rgba(0,240,255,.28); color:#fff;}
 </style>
 </head>
 <body class="bg-charcoal text-fg antialiased overflow-x-hidden">
 
 <audio id="hall-music" src="549.mp3" loop preload="auto"></audio>
 
-<!-- 3D ember particle field -->
+<!-- 3D ember/smoke particle field -->
 <canvas id="particles-bg" class="fixed inset-0 -z-20" aria-hidden="true"></canvas>
-<div class="fixed inset-0 -z-10 bg-gradient-to-b from-charcoal-deep/60 via-charcoal-deep/30 to-charcoal-deep/90" aria-hidden="true"></div>
-<div class="fixed inset-0 -z-10 pointer-events-none" style="background:radial-gradient(ellipse at 50% 0%, transparent 0%, rgba(9,10,15,.7) 70%)" aria-hidden="true"></div>
+<div class="fixed inset-0 -z-10 bg-gradient-to-b from-charcoal-deep/55 via-charcoal-deep/25 to-charcoal-deep/90" aria-hidden="true"></div>
+<div class="fixed inset-0 -z-10 pointer-events-none" style="background:radial-gradient(ellipse at 50% 10%, transparent 0%, rgba(7,8,11,.75) 72%)" aria-hidden="true"></div>
 
 <!-- Gate: click to enter, starts the hall music -->
 <div id="gate" class="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal-deep/95 backdrop-blur-md px-6 transition-opacity duration-700">
-  <div class="max-w-md w-full text-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 sm:p-10 shadow-glow-ice animate-pulse-border">
-    <svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto mb-5 text-ice drop-shadow-[0_0_14px_rgba(63,216,255,.6)]" aria-hidden="true">
-      <g fill="none" stroke="currentColor" stroke-width="1.6">
-        <circle cx="50" cy="50" r="46"/>
-        <circle cx="50" cy="50" r="34"/>
-        <path d="M50 4 L50 96 M4 50 L96 50 M17 17 L83 83 M83 17 L17 83"/>
-        <path d="M50 12 L56 46 L50 40 L44 46 Z" fill="currentColor" stroke="none"/>
-        <path d="M50 88 L56 54 L50 60 L44 54 Z" fill="currentColor" stroke="none"/>
-        <path d="M12 50 L46 44 L40 50 L46 56 Z" fill="currentColor" stroke="none"/>
-        <path d="M88 50 L54 44 L60 50 L54 56 Z" fill="currentColor" stroke="none"/>
-        <circle cx="50" cy="50" r="4" fill="currentColor" stroke="none"/>
-      </g>
-    </svg>
-    <div class="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-fg">Войти в 549</div>
-    <p class="text-fg-muted text-sm italic mt-1">Enter 549</p>
-    <button id="enter-btn" type="button" class="mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-ember px-8 py-3 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember animate-ember-pulse hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-deep">
-      <i data-lucide="flame" class="w-5 h-5" aria-hidden="true"></i>
+  <div class="max-w-md w-full text-center rounded-2xl border border-amber/40 bg-white/5 backdrop-blur-xl p-8 sm:p-10 animate-pulse-border">
+    <div id="rune-emblem-fallback" class="w-16 h-16 mx-auto mb-5 text-amber" aria-hidden="true">
+      <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_16px_rgba(255,170,0,.55)]">
+        <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+          <path d="M50 88 V38 M50 38 L28 12 M50 38 L72 12"/>
+        </g>
+      </svg>
+    </div>
+    <div class="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-fg">Войти на K549</div>
+    <p class="text-fg-muted text-sm italic mt-1">Enter K549</p>
+    <button id="enter-btn" type="button" class="rune-framed rune-framed-amber mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-ember py-3 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember animate-ember-pulse hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-deep">
       Переступить порог
     </button>
     <p class="text-fg-muted text-xs mt-4">🔊 Со звуком — на входе зазвучит музыка чертога</p>
@@ -101,7 +123,7 @@
 
 <!-- floating music toggle -->
 <button id="music-toggle" aria-label="Включить музыку" aria-pressed="false"
-  class="fixed bottom-5 right-5 z-40 w-13 h-13 flex items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-lg text-ice opacity-0 scale-75 transition-all duration-500 hover:border-ice/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
+  class="fixed bottom-5 right-5 z-40 flex items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-lg text-ice opacity-0 scale-75 transition-all duration-500 hover:border-ice/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
   style="width:52px;height:52px;">
   <i data-lucide="volume-x" class="w-5 h-5 pointer-events-none" aria-hidden="true"></i>
 </button>
@@ -109,138 +131,205 @@
 <!-- Header -->
 <header class="fixed top-0 inset-x-0 z-30 border-b border-white/5 bg-charcoal/70 backdrop-blur-lg">
   <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-2 font-display font-bold text-lg sm:text-xl tracking-wide bg-gradient-to-b from-fg via-ice to-fg-muted bg-clip-text text-transparent">
-      <svg viewBox="0 0 32 32" class="w-6 h-6 text-ice flex-shrink-0" aria-hidden="true"><path d="M16 3 V29 M16 12 L6 4 M16 12 L26 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-      549 · МИГРАЦИЯ
+    <a href="#top" class="flex items-center gap-2 font-display font-bold text-lg sm:text-xl tracking-wide">
+      <svg viewBox="0 0 32 32" class="w-6 h-6 text-amber flex-shrink-0" aria-hidden="true"><path d="M16 3 V29 M16 12 L6 4 M16 12 L26 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span class="text-metal">K549</span><span class="text-fg-muted font-normal text-sm ml-1 hidden sm:inline">| MIGRATION</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-fg-muted">
-      <a href="#top" class="hover:text-ice transition-colors">Главная</a>
-      <a href="#features" class="hover:text-ice transition-colors">Особенности</a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-fg-muted">
+      <a href="#top" class="hover:text-ice transition-colors">О сервере</a>
+      <a href="#features" class="hover:text-ice transition-colors">Преимущества</a>
+      <a href="#requirements" class="hover:text-ice transition-colors">Требования</a>
       <a href="#chieftains" class="hover:text-ice transition-colors">Хёвдинги</a>
-      <a href="#contacts" class="hover:text-ice transition-colors">Контакты</a>
+      <a href="#form" class="hover:text-ice transition-colors">Связь</a>
     </nav>
 
-    <a href="#form" class="hidden sm:inline-flex items-center gap-2 rounded-lg bg-ember px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep hover:brightness-110 active:scale-[.98] transition shadow-glow-ember/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+    <a href="#form" class="rune-framed rune-framed-amber hidden sm:inline-flex items-center gap-2 rounded-lg bg-ember py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
       Подать заявку
     </a>
 
-    <button id="menu-toggle" class="md:hidden text-fg p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice rounded" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+    <button id="menu-toggle" class="lg:hidden text-fg p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice rounded" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
       <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
     </button>
   </div>
 
-  <nav id="mobile-menu" hidden class="md:hidden border-t border-white/5 bg-charcoal-deep/95 backdrop-blur-lg px-5 py-4 flex flex-col gap-4 text-fg-muted">
-    <a href="#top" class="hover:text-ice transition-colors">Главная</a>
-    <a href="#features" class="hover:text-ice transition-colors">Особенности</a>
+  <nav id="mobile-menu" hidden class="lg:hidden border-t border-white/5 bg-charcoal-deep/95 backdrop-blur-lg px-5 py-4 flex flex-col gap-4 text-fg-muted">
+    <a href="#top" class="hover:text-ice transition-colors">О сервере</a>
+    <a href="#features" class="hover:text-ice transition-colors">Преимущества</a>
+    <a href="#requirements" class="hover:text-ice transition-colors">Требования</a>
     <a href="#chieftains" class="hover:text-ice transition-colors">Хёвдинги</a>
-    <a href="#contacts" class="hover:text-ice transition-colors">Контакты</a>
     <a href="#form" class="inline-flex items-center justify-center gap-2 rounded-lg bg-ember px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep">Подать заявку</a>
   </nav>
 </header>
 
-<main>
+<main class="px-4 sm:px-6 lg:px-8">
 
   <!-- Hero -->
-  <section id="top" class="relative min-h-screen flex items-center justify-center text-center px-5 pt-28 pb-16">
-    <div class="relative z-10 max-w-3xl mx-auto">
-      <div class="inline-flex items-center gap-2 rounded-full border border-ice/30 bg-ice/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-ice mb-6">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
-        Набор открыт
+  <section id="top" class="relative min-h-screen flex items-center justify-center pt-24 pb-14">
+    <div class="w-full max-w-6xl mx-auto rounded-3xl border border-amber/30 bg-charcoal/60 backdrop-blur-xl shadow-glow-ember/30 p-6 sm:p-10 lg:p-14">
+      <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-10 items-center">
+        <div>
+          <div class="rune-framed rune-framed-amber inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/5 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber mb-6">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            Открыт набор альянсов и соло-игроков
+          </div>
+
+          <h1 class="text-metal font-display font-black uppercase leading-[1.05] text-4xl sm:text-5xl lg:text-6xl tracking-wide">
+            Переходи на<br>кингдом #549
+          </h1>
+
+          <p class="mt-6 text-base sm:text-lg text-fg-muted max-w-xl leading-relaxed">
+            Сильный сервер, активные KVK-битвы, отсутствие токса и чёткая стратегия развития. Твой новый дом в Viking Rise.
+          </p>
+
+          <div class="mt-9 flex flex-col sm:flex-row gap-4">
+            <a href="#form" class="rune-framed rune-framed-amber inline-flex items-center justify-center gap-2 rounded-xl bg-ember py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+              <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
+              Подать заявку на миграцию
+            </a>
+            <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 backdrop-blur px-8 py-4 font-display font-semibold uppercase tracking-wider text-fg hover:border-ice/50 hover:text-ice transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+              <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
+              Наш Telegram
+            </a>
+          </div>
+
+          <div class="mt-10 flex flex-wrap gap-3 font-stat">
+            <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-sm text-fg-muted">
+              <i data-lucide="swords" class="w-4 h-4 text-ice" aria-hidden="true"></i> Активные KVK
+            </div>
+            <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-sm text-fg-muted">
+              <i data-lucide="users" class="w-4 h-4 text-ice" aria-hidden="true"></i> Открыт приём альянсов
+            </div>
+            <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-sm text-fg-muted">
+              <i data-lucide="shield-check" class="w-4 h-4 text-ice" aria-hidden="true"></i> Стабильное руководство
+            </div>
+          </div>
+        </div>
+
+        <div id="emblem-3d" class="relative w-full aspect-square max-w-sm mx-auto" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why K549 -->
+  <section id="features" class="relative py-20">
+    <div class="max-w-6xl mx-auto rounded-3xl border border-white/10 bg-charcoal/50 backdrop-blur-xl p-6 sm:p-10 lg:p-14">
+      <div class="text-center mb-12">
+        <h2 class="text-metal font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide">Почему K549</h2>
+        <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Why K549</p>
       </div>
 
-      <h1 class="font-display font-black uppercase leading-[1.05] text-4xl sm:text-6xl lg:text-7xl tracking-wide text-fg drop-shadow-[0_0_28px_rgba(63,216,255,.35)]">
-        Добро пожаловать<br><span class="bg-gradient-to-r from-ice via-fg to-amber bg-clip-text text-transparent">в 549</span>
-      </h1>
-      <p class="font-display text-fg-muted text-sm sm:text-base tracking-[0.3em] uppercase mt-3">Welcome to 549</p>
-
-      <p class="mt-8 text-base sm:text-lg text-fg-muted max-w-2xl mx-auto leading-relaxed">
-        Тёплый вайб, взаимопомощь на каждом шагу и голосовые чаты для координации. В 549 не боятся идти в бой и терять войска, потому что играют вместе.
-        <span class="block italic text-fg-muted/70 mt-3 text-sm sm:text-base">A cool vibe, mutual assistance at every turn and voice chats for coordination. In 549 we are not afraid to go into battle and lose troops, because we play together.</span>
-      </p>
-
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#form" class="inline-flex items-center gap-2 rounded-xl bg-ember px-8 py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
-          <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
-          Подать заявку на миграцию
-        </a>
-        <a href="#features" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 backdrop-blur px-8 py-4 font-display font-semibold uppercase tracking-wider text-fg hover:border-ice/50 hover:text-ice transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
-          <i data-lucide="chevron-down" class="w-5 h-5" aria-hidden="true"></i>
-          Что вас ждёт
-        </a>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5" id="tilt-grid">
+        <div class="tilt-card rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="shield" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Справедливое распределение наград</p>
+          <p class="text-fg-muted text-sm mt-2">Адекватный совет сервера и прозрачная система управления.</p>
+        </div>
+        <div class="tilt-card rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="swords" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Активный KVK и PvP</p>
+          <p class="text-fg-muted text-sm mt-2">Никакого афк — регулярные войны и защита союзников.</p>
+        </div>
+        <div class="tilt-card rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="heart-handshake" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Поддержка при переходе</p>
+          <p class="text-fg-muted text-sm mt-2">Помогаем топ-альянсам и соло-бойцам адаптироваться на новом месте.</p>
+        </div>
+        <div class="tilt-card rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="scroll-text" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Чёткие правила сервера</p>
+          <p class="text-fg-muted text-sm mt-2">Запрет на внутренний грабёж и бессмысленный зерг клиринг.</p>
+        </div>
       </div>
 
-      <div class="mt-12 flex flex-wrap items-center justify-center gap-3">
-        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-xs sm:text-sm text-fg-muted">
-          <i data-lucide="message-circle" class="w-4 h-4 text-ice" aria-hidden="true"></i> 3 канала связи: игра / Telegram / Discord
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted"><i data-lucide="message-circle" class="w-4 h-4 text-amber" aria-hidden="true"></i>Живые чаты в игре, Telegram и Discord</div>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted"><i data-lucide="book-open" class="w-4 h-4 text-amber" aria-hidden="true"></i>Гайды и советы по саморазвитию</div>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted">🍌 Свои традиции</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements + Application form -->
+  <section id="requirements" class="relative py-20">
+    <div class="max-w-6xl mx-auto rounded-3xl border border-amber/30 bg-charcoal/60 backdrop-blur-xl p-6 sm:p-10 lg:p-14 shadow-glow-ember/20">
+      <div class="grid lg:grid-cols-2 gap-12">
+
+        <div>
+          <h2 class="text-metal font-display font-bold uppercase text-2xl sm:text-3xl tracking-wide">Требования для миграции</h2>
+          <p class="font-display text-fg-muted text-xs tracking-[0.3em] uppercase mt-2 mb-8">Requirements</p>
+
+          <ul class="space-y-5">
+            <li class="flex items-start gap-3">
+              <i data-lucide="shield" class="w-5 h-5 text-amber flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+              <span class="font-stat text-lg text-fg">Сообщите силу и очки убийства — подберём подходящее место</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="swords" class="w-5 h-5 text-amber flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+              <span class="font-stat text-lg text-fg">Т5-войска — большой плюс, но не обязательное условие</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="zap" class="w-5 h-5 text-amber flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+              <span class="font-stat text-lg text-fg">Готовность участвовать в KVK и голосовых чатах</span>
+            </li>
+          </ul>
+
+          <div class="mt-10 rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div class="flex items-center gap-2 font-display font-bold uppercase text-sm tracking-wide text-ice mb-2">
+              <i data-lucide="users" class="w-4 h-4" aria-hidden="true"></i> Лидерам альянсов
+            </div>
+            <p class="text-fg-muted text-sm">Переносите альянс целиком? Напишите хёвдингам напрямую — обсудим перенос и распределение мест индивидуально.</p>
+          </div>
         </div>
-        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-xs sm:text-sm text-fg-muted">
-          <i data-lucide="shield-check" class="w-4 h-4 text-ice" aria-hidden="true"></i> Прозрачное руководство
-        </div>
-        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-xs sm:text-sm text-fg-muted">
-          🍌 Свои традиции
+
+        <div>
+          <h3 class="font-display font-bold uppercase text-lg text-fg mb-1">Заявка на миграцию</h3>
+          <p class="text-fg-muted text-sm mb-6">Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊</p>
+
+          <form id="migration-form" class="flex flex-col gap-5">
+            <label class="block text-xs uppercase tracking-widest text-fg-muted">
+              Игровой ник <span aria-hidden="true" class="text-ember">*</span>
+              <input type="text" name="nickname" required aria-required="true" autocomplete="off" placeholder="например: Ragnar_K549"
+                class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
+            </label>
+            <label class="block text-xs uppercase tracking-widest text-fg-muted">
+              Из какого вы сервера?
+              <input type="text" name="server" autocomplete="off" placeholder="например: 412"
+                class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
+            </label>
+            <label class="block text-xs uppercase tracking-widest text-fg-muted">
+              Мощь и очки убийства (MGP / KP)
+              <input type="text" name="power" autocomplete="off" placeholder="например: 90M / 12M KP"
+                class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
+            </label>
+            <label class="block text-xs uppercase tracking-widest text-fg-muted">
+              Фермы и наличие T5
+              <input type="text" name="farms" autocomplete="off" placeholder="например: 3, T5 есть"
+                class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
+            </label>
+
+            <button type="submit" class="rune-framed rune-framed-amber mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-ember py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+              <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
+              Отправить заявку на трансфер
+            </button>
+            <p class="text-fg-muted text-xs text-center">* обязательное поле / * required field<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
+          </form>
+
+          <div id="form-result" hidden aria-live="polite" class="mt-6 rounded-xl border border-ember/40 bg-ember/10 p-5 text-sm"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section id="features" class="relative px-5 sm:px-8 py-24">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-14">
-        <h2 class="font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide text-fg">Что вас ждёт в 549</h2>
-        <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">What can you expect in 549</p>
-      </div>
+  <!-- Chieftains -->
+  <section id="chieftains" class="relative py-20">
+    <div class="max-w-4xl mx-auto rounded-3xl border border-white/10 bg-charcoal/50 backdrop-blur-xl p-6 sm:p-10 lg:p-14 text-center">
+      <h2 class="text-metal font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide">Хёвдинги K549</h2>
+      <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Chieftains</p>
+      <p class="text-fg-muted mt-4 max-w-xl mx-auto">Свяжитесь напрямую — они ведут приём заявок и координируют миграцию.</p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="tilt-grid">
-        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
-          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="message-circle" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Живые активные чаты в игре, Телеграме и Дискорде</p>
-          <p class="text-fg-muted text-sm italic mt-2">Active chats in the game, Telegram and Discord</p>
-        </div>
-        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
-          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="sparkles" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Творческие конкурсы и мероприятия, чтобы не скучать в межсезонье</p>
-          <p class="text-fg-muted text-sm italic mt-2">Creative contests and events to have fun between KVK</p>
-        </div>
-        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
-          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="shield-check" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Адекватное руководство и прозрачная система управления</p>
-          <p class="text-fg-muted text-sm italic mt-2">Loyal management and transparent management system</p>
-        </div>
-        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
-          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="book-open" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Гайды, советы и подсказки по ивентам и саморазвитию</p>
-          <p class="text-fg-muted text-sm italic mt-2">Guides, tips and tricks on events and self-development</p>
-        </div>
-        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
-          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="bell" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Письма и метки от R4/R5 — вы всегда будете знать, что происходит в игре</p>
-          <p class="text-fg-muted text-sm italic mt-2">Letters and bookmarks from R4/R5 — you will always know what is happening in the game</p>
-        </div>
-        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
-          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="users" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Уважение — запрет на оскорбления и обсуждение религии/политики. У нас отсутствуют внутренние конфликты</p>
-          <p class="text-fg-muted text-sm italic mt-2">Respect. There is a ban on insults and discussion of religion/politics. We have no internal conflicts</p>
-        </div>
-        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice sm:col-span-2 lg:col-span-1">
-          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="smile" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Бананы 🍌</p>
-          <p class="text-fg-muted text-sm italic mt-2">Bananas 🍌</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Chieftains ("heroes" section, adapted to the real contacts) -->
-  <section id="chieftains" class="relative px-5 sm:px-8 py-24">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide text-fg">Хёвдинги 549</h2>
-      <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Chieftains of 549</p>
-      <p class="text-fg-muted mt-4 max-w-xl mx-auto">Свяжитесь напрямую — они ведут приём заявок и отвечают на вопросы о миграции.</p>
-
-      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-8 text-center hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-8 hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
           <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-ice/20 to-ember/20 border border-white/10 flex items-center justify-center mb-4">
             <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
           </div>
@@ -248,7 +337,7 @@
           <div class="text-xs uppercase tracking-widest text-amber mt-1">Хёвдинг · Приём заявок</div>
           <div class="text-ice text-sm mt-3 inline-flex items-center gap-1.5 group-hover:underline"><i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>@Keypoint21</div>
         </a>
-        <a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-8 text-center hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+        <a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-8 hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
           <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-ice/20 to-ember/20 border border-white/10 flex items-center justify-center mb-4">
             <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
           </div>
@@ -260,62 +349,20 @@
     </div>
   </section>
 
-  <!-- Application form -->
-  <section id="form" class="relative px-5 sm:px-8 py-24">
-    <div class="max-w-xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 shadow-glow-ice/40">
-      <div class="text-center">
-        <h2 class="font-display font-bold uppercase text-2xl sm:text-3xl tracking-wide text-fg">Подайте заявку на миграцию</h2>
-        <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Apply for migration</p>
-        <p class="text-fg-muted mt-4 text-sm sm:text-base">Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊<br><span class="italic">Tell us about yourself so that we can prepare the best place for you 😊</span></p>
-      </div>
-
-      <form id="migration-form" class="mt-8 flex flex-col gap-5 text-left">
-        <label class="block text-sm text-fg-muted">
-          Ник в игре <span aria-hidden="true" class="text-ember">*</span><span class="italic text-fg-muted/70"> / Nickname in the game</span>
-          <input type="text" name="nickname" required aria-required="true" autocomplete="off"
-            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
-        </label>
-        <label class="block text-sm text-fg-muted">
-          Из какого вы сервера?<span class="italic text-fg-muted/70"> / Which server are you from?</span>
-          <input type="text" name="server" autocomplete="off"
-            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
-        </label>
-        <label class="block text-sm text-fg-muted">
-          Сила аккаунта и Количество очков убийства<span class="italic text-fg-muted/70"> / What is your account might and how many kill points do you have?</span>
-          <input type="text" name="power" autocomplete="off"
-            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
-        </label>
-        <label class="block text-sm text-fg-muted">
-          Сколько у вас ферм? Есть ли на них Т5?<span class="italic text-fg-muted/70"> / How many farm accounts do you have? Do they have T5 on them?</span>
-          <input type="text" name="farms" autocomplete="off"
-            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
-        </label>
-
-        <button type="submit" class="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-ember px-8 py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
-          <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
-          Отправить
-        </button>
-        <p class="text-fg-muted text-xs text-center">* обязательное поле / * required field<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
-      </form>
-
-      <div id="form-result" hidden aria-live="polite" class="mt-6 rounded-xl border border-ember/40 bg-ember/10 p-5 text-left text-sm"></div>
-    </div>
-  </section>
-
 </main>
 
-<!-- Contacts / Footer -->
-<footer id="contacts" class="relative border-t border-white/5 px-5 sm:px-8 py-14">
+<!-- Footer -->
+<footer class="relative border-t border-white/5 px-5 sm:px-8 py-14">
   <div class="max-w-4xl mx-auto text-center">
-    <div class="font-display font-bold uppercase tracking-widest text-fg mb-1">549 · Миграция</div>
-    <p class="text-fg-muted text-sm mb-6">Чертог клана 549 — здесь начинается ваш новый поход.</p>
+    <div class="text-metal font-display font-bold uppercase tracking-widest mb-1 inline-block">K549 · Migration</div>
+    <p class="text-fg-muted text-sm mb-6">Чертог кингдома #549 — здесь начинается ваш новый поход.</p>
     <div class="flex items-center justify-center gap-4">
       <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" aria-label="Telegram: 21СаМец21"
         class="w-11 h-11 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-ice hover:border-ice/50 hover:shadow-glow-ice transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
         <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
       </a>
     </div>
-    <p class="text-fg-muted/60 text-xs mt-8">Made for the 549 clan · не является официальным сайтом какой-либо игры</p>
+    <p class="text-fg-muted/60 text-xs mt-8">Неофициальный фан-сайт для сообщества K549 · не является официальным ресурсом Viking Rise</p>
   </div>
 </footer>
 
@@ -324,62 +371,77 @@ import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 
 try {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- background ember + smoke particle field ---------- */
   const canvas = document.getElementById('particles-bg');
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  const bgRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  bgRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  bgRenderer.setSize(window.innerWidth, window.innerHeight);
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 20;
+  const bgScene = new THREE.Scene();
+  const bgCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+  bgCamera.position.z = 20;
 
-  const COUNT = reduceMotion ? 200 : 900;
-  const positions = new Float32Array(COUNT * 3);
-  const speeds = new Float32Array(COUNT);
-  const sways = new Float32Array(COUNT);
-  const colors = new Float32Array(COUNT * 3);
-
-  const colorA = new THREE.Color('#ff6b00');
-  const colorB = new THREE.Color('#ffaa00');
-
-  for (let i = 0; i < COUNT; i++) {
-    positions[i * 3 + 0] = (Math.random() - 0.5) * 40;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 24;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
-    speeds[i] = 0.4 + Math.random() * 0.8;
-    sways[i] = Math.random() * Math.PI * 2;
-    const c = colorA.clone().lerp(colorB, Math.random());
-    colors[i * 3] = c.r; colors[i * 3 + 1] = c.g; colors[i * 3 + 2] = c.b;
-  }
-
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-  function sparkTexture() {
+  function softSprite(innerColor, outerColor) {
     const c = document.createElement('canvas');
     c.width = c.height = 64;
     const ctx = c.getContext('2d');
     const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    g.addColorStop(0, 'rgba(255,255,255,1)');
-    g.addColorStop(0.3, 'rgba(255,200,120,0.9)');
-    g.addColorStop(1, 'rgba(255,120,0,0)');
+    g.addColorStop(0, innerColor);
+    g.addColorStop(0.35, outerColor);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, 64, 64);
     return new THREE.CanvasTexture(c);
   }
 
-  const material = new THREE.PointsMaterial({
-    size: 0.34,
-    map: sparkTexture(),
-    vertexColors: true,
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-  });
+  function makeField(count, opts) {
+    const positions = new Float32Array(count * 3);
+    const speeds = new Float32Array(count);
+    const sways = new Float32Array(count);
+    const colors = new Float32Array(count * 3);
+    const colorA = new THREE.Color(opts.colorA);
+    const colorB = new THREE.Color(opts.colorB);
+    for (let i = 0; i < count; i++) {
+      positions[i * 3 + 0] = (Math.random() - 0.5) * opts.spreadX;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * opts.spreadY;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * opts.spreadZ;
+      speeds[i] = opts.speedMin + Math.random() * opts.speedRange;
+      sways[i] = Math.random() * Math.PI * 2;
+      const c = colorA.clone().lerp(colorB, Math.random());
+      colors[i * 3] = c.r; colors[i * 3 + 1] = c.g; colors[i * 3 + 2] = c.b;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    const material = new THREE.PointsMaterial({
+      size: opts.size,
+      map: softSprite(opts.innerColor, opts.outerColor),
+      vertexColors: true,
+      transparent: true,
+      opacity: opts.opacity,
+      depthWrite: false,
+      blending: opts.additive ? THREE.AdditiveBlending : THREE.NormalBlending,
+    });
+    const points = new THREE.Points(geo, material);
+    bgScene.add(points);
+    return { points, geo, speeds, sways, wrapAt: opts.spreadY / 2 };
+  }
 
-  const points = new THREE.Points(geo, material);
-  scene.add(points);
+  const embers = makeField(reduceMotion ? 150 : 700, {
+    spreadX: 40, spreadY: 24, spreadZ: 20,
+    speedMin: 0.4, speedRange: 0.8, size: 0.32,
+    colorA: '#ff6b00', colorB: '#ffaa00',
+    innerColor: 'rgba(255,255,255,1)', outerColor: 'rgba(255,150,50,0.9)',
+    opacity: 0.9, additive: true,
+  });
+  const smoke = makeField(reduceMotion ? 40 : 120, {
+    spreadX: 46, spreadY: 26, spreadZ: 24,
+    speedMin: 0.08, speedRange: 0.12, size: 2.2,
+    colorA: '#6b7280', colorB: '#3f4451',
+    innerColor: 'rgba(140,140,150,0.5)', outerColor: 'rgba(90,90,100,0.25)',
+    opacity: 0.16, additive: false,
+  });
 
   let mouseX = 0, mouseY = 0, camX = 0, camY = 0;
   if (!reduceMotion) {
@@ -389,37 +451,139 @@ try {
     }, { passive: true });
   }
 
-  window.addEventListener('resize', function () {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  const posAttr = geo.attributes.position;
   const clock = new THREE.Clock();
+  function animateField(field, t) {
+    const arr = field.geo.attributes.position.array;
+    for (let i = 0; i < field.speeds.length; i++) {
+      let y = arr[i * 3 + 1] + field.speeds[i] * 0.01;
+      if (y > field.wrapAt) y = -field.wrapAt;
+      arr[i * 3 + 1] = y;
+      arr[i * 3 + 0] += Math.sin(t * 0.4 + field.sways[i]) * 0.0025;
+    }
+    field.geo.attributes.position.needsUpdate = true;
+  }
 
-  function renderFrame() {
+  function renderBg() {
     if (!reduceMotion) {
       const t = clock.getElapsedTime();
-      for (let i = 0; i < COUNT; i++) {
-        let y = posAttr.array[i * 3 + 1] + speeds[i] * 0.01;
-        if (y > 12) y = -12;
-        posAttr.array[i * 3 + 1] = y;
-        posAttr.array[i * 3 + 0] += Math.sin(t * 0.5 + sways[i]) * 0.003;
-      }
-      posAttr.needsUpdate = true;
+      animateField(embers, t);
+      animateField(smoke, t * 0.4);
       camX += (mouseX * 1.2 - camX) * 0.02;
       camY += (-mouseY * 0.8 - camY) * 0.02;
-      camera.position.x = camX;
-      camera.position.y = camY;
-      camera.lookAt(0, 0, 0);
+      bgCamera.position.x = camX;
+      bgCamera.position.y = camY;
+      bgCamera.lookAt(0, 0, 0);
     }
-    renderer.render(scene, camera);
-    if (!reduceMotion) requestAnimationFrame(renderFrame);
+    bgRenderer.render(bgScene, bgCamera);
+    if (!reduceMotion) requestAnimationFrame(renderBg);
   }
-  renderFrame();
+  renderBg();
+
+  /* ---------- glowing glass rune emblem ---------- */
+  const emblemContainer = document.getElementById('emblem-3d');
+  const fallback = document.getElementById('rune-emblem-fallback');
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  camera.position.set(0, 0.1, 6.2);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setClearColor(0x000000, 0);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  emblemContainer.appendChild(renderer.domElement);
+
+  scene.add(new THREE.AmbientLight(0x0c0e10, 0.5));
+  const key = new THREE.DirectionalLight(0x8fe9ff, 1.6);
+  key.position.set(2, 3, 3);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0xff9a3d, 1.4);
+  rim.position.set(-2.5, -1, -2.5);
+  scene.add(rim);
+  const fill = new THREE.PointLight(0xffaa00, 1.1, 12);
+  fill.position.set(0, -1.5, 2.5);
+  scene.add(fill);
+
+  // Algiz rune extruded into real 3D glass
+  const shape = new THREE.Shape();
+  const w = 0.22;
+  shape.moveTo(-w, -2.1); shape.lineTo(w, -2.1); shape.lineTo(w, -0.35);
+  shape.lineTo(1.15, 1.65); shape.lineTo(0.78, 2.0); shape.lineTo(0, 0.55);
+  shape.lineTo(-0.78, 2.0); shape.lineTo(-1.15, 1.65); shape.lineTo(-w, -0.35);
+  shape.lineTo(-w, -2.1);
+
+  const runeGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.34, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 3 });
+  runeGeo.center();
+
+  const glass = new THREE.MeshPhysicalMaterial({
+    color: 0xbfeeff,
+    metalness: 0,
+    roughness: 0.08,
+    transmission: 0.92,
+    thickness: 1.1,
+    ior: 1.4,
+    transparent: true,
+    opacity: 0.96,
+    emissive: 0x1a7a8f,
+    emissiveIntensity: 0.35,
+  });
+
+  const rune = new THREE.Mesh(runeGeo, glass);
+  scene.add(rune);
+
+  // soft additive glow halo behind the rune
+  function glowTexture() {
+    const c = document.createElement('canvas'); c.width = c.height = 256;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    g.addColorStop(0, 'rgba(140,220,255,0.55)');
+    g.addColorStop(0.5, 'rgba(255,170,0,0.18)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, 256, 256);
+    return new THREE.CanvasTexture(c);
+  }
+  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture(), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  glow.scale.set(6.5, 6.5, 1);
+  glow.position.z = -0.5;
+  scene.add(glow);
+
+  function fit() {
+    const s = emblemContainer.clientWidth;
+    if (!s) return;
+    renderer.setSize(s, s);
+    camera.aspect = 1;
+    camera.updateProjectionMatrix();
+  }
+  fit();
+  new ResizeObserver(fit).observe(emblemContainer);
+  window.addEventListener('resize', fit);
+
+  fallback.style.display = 'none';
+
+  let tX = 0, tY = 0, cX = 0, cY = 0;
+  if (!reduceMotion) {
+    window.addEventListener('pointermove', function (e) {
+      tX = (e.clientX / window.innerWidth) * 2 - 1;
+      tY = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+  }
+
+  if (reduceMotion) {
+    renderer.render(scene, camera);
+  } else {
+    const emblemClock = new THREE.Clock();
+    (function animateEmblem() {
+      requestAnimationFrame(animateEmblem);
+      const t = emblemClock.getElapsedTime();
+      cX += (tX - cX) * 0.04;
+      cY += (tY - cY) * 0.04;
+      rune.rotation.y = t * 0.4 + cX * 0.4;
+      rune.rotation.x = cY * 0.2;
+      rune.position.y = Math.sin(t * 0.8) * 0.12;
+      renderer.render(scene, camera);
+    })();
+  }
 } catch (err) {
-  // no WebGL: page still works fine, just without the ember field
+  // no WebGL / CDN blocked: page still fully works, just without the 3D/particle layer
 }
 </script>
 
@@ -512,7 +676,7 @@ try {
     e.preventDefault();
     var data = new FormData(form);
     var text =
-      'Заявка на миграцию в 549 / Migration application to 549\n' +
+      'Заявка на миграцию в K549 / Migration application to K549\n' +
       'Ник в игре / Nickname: ' + data.get('nickname') + '\n' +
       'Сервер / Server: ' + (data.get('server') || '—') + '\n' +
       'Сила и очки убийства / Might & kill points: ' + (data.get('power') || '—') + '\n' +
@@ -521,7 +685,7 @@ try {
     result.hidden = false;
     result.innerHTML =
       '<h3 class="font-display font-bold uppercase tracking-wide text-fg mb-2">Анкета готова / Application ready</h3>' +
-      '<pre class="whitespace-pre-wrap break-words bg-charcoal-deep/60 rounded-lg p-4 text-fg-muted"></pre>' +
+      '<pre class="whitespace-pre-wrap break-words bg-charcoal-deep/60 rounded-lg p-4 text-fg-muted font-stat"></pre>' +
       '<p class="text-fg-muted mt-3">Скопируйте анкету и отправьте одному из хёвдингов в Telegram.<br>' +
       '<span class="italic">Copy the application and send it to one of the chieftains on Telegram.</span></p>' +
       '<div class="flex flex-wrap gap-2 mt-3">' +
