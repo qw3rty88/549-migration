@@ -4,24 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>549 · Миграция — Чертог клана</title>
-<meta name="description" content="549. Миграция — присоединяйтесь к клану 549. Тёплый вайб, взаимопомощь и голосовые чаты для координации.">
+<meta name="description" content="549. Миграция — присоединяйтесь к клану 549. Суровый чертог, взаимопомощь и голосовые чаты для координации.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-0:#0a0806;
-    --bg-1:#151009;
-    --wood-1:#241a10;
-    --wood-2:#1a130c;
-    --gold:#cda545;
-    --gold-bright:#e8c874;
-    --gold-dim:#8a6d2f;
-    --parchment:#e9dcbd;
-    --parchment-dim:#cdbd93;
-    --iron:#413a30;
-    --blood:#7a2115;
-    --blood-bright:#a8351f;
-    --ink:#241a10;
-    --shadow-deep: 0 10px 30px rgba(0,0,0,.55);
-    --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+    --bg-0:#050607;
+    --bg-1:#0c0e10;
+    --stone-1:#15181a;
+    --stone-2:#0d0f10;
+    --iron:#565f66;
+    --iron-dim:#33393d;
+    --steel:#8b96a0;
+    --bronze:#a3792f;
+    --bronze-bright:#c99a4a;
+    --bronze-dim:#5f4d26;
+    --bone:#d9d4c6;
+    --bone-dim:#a9a394;
+    --blood:#5a0f0c;
+    --blood-bright:#9c2118;
+    --ink:#0e0f0f;
+    --shadow-deep: 0 14px 34px rgba(0,0,0,.7);
+    --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+    --display: 'Cinzel', 'EB Garamond', Georgia, serif;
+    --edge: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   }
 
   *{box-sizing:border-box;}
@@ -29,21 +36,21 @@
   body{
     margin:0;
     background:
-      radial-gradient(ellipse at 50% -10%, #2a1e10 0%, var(--bg-1) 45%, var(--bg-0) 100%);
-    color:var(--parchment);
+      radial-gradient(ellipse at 50% -10%, #16191b 0%, var(--bg-1) 45%, var(--bg-0) 100%);
+    color:var(--bone);
     font-family:var(--serif);
-    line-height:1.5;
+    line-height:1.55;
     overflow-x:hidden;
   }
 
-  /* film-grain / leather texture, pure SVG noise, no external assets */
+  /* film-grain / stone texture, pure SVG noise, no external assets */
   body::before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:2;
-    opacity:.09;
+    opacity:.11;
     mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -54,15 +61,19 @@
     inset:0;
     pointer-events:none;
     z-index:3;
-    box-shadow: inset 0 0 18vw rgba(0,0,0,.75);
+    box-shadow: inset 0 0 20vw rgba(0,0,0,.85);
   }
 
   h1,h2,h3{
-    font-family:var(--serif);
-    color:var(--gold-bright);
+    font-family:var(--display);
+    font-weight:700;
+    color:var(--bronze-bright);
     text-transform:uppercase;
-    letter-spacing:.06em;
-    text-shadow:0 2px 0 rgba(0,0,0,.6), 0 0 22px rgba(205,165,69,.18);
+    letter-spacing:.09em;
+    text-shadow:
+      0 1px 0 rgba(0,0,0,.9),
+      0 -1px 0 rgba(255,255,255,.04),
+      0 3px 10px rgba(0,0,0,.7);
     margin:0 0 .3em;
   }
   .en{
@@ -71,62 +82,83 @@
     font-style:italic;
     text-transform:none;
     letter-spacing:.02em;
-    color:var(--parchment-dim);
+    color:var(--bone-dim);
     font-weight:400;
   }
   p .en, span.en, label .en{display:inline; font-size:.92em;}
 
-  a{color:var(--gold);}
+  a{color:var(--bronze-bright);}
 
   .runes{
     letter-spacing:.5em;
-    color:var(--gold-dim);
+    color:var(--iron);
     font-size:1rem;
     text-align:center;
     user-select:none;
+    font-family:'Segoe UI Historic','Segoe UI Symbol','Noto Sans Runic',var(--serif);
   }
 
   section, header, footer{position:relative; z-index:1;}
+
+  /* crossed-axes divider ornament */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:1.1rem;
+    margin:0 auto 2.5rem;
+    color:var(--iron);
+  }
+  .divider::before, .divider::after{
+    content:"";
+    height:1px;
+    width:clamp(40px,14vw,140px);
+    background:linear-gradient(90deg, transparent, var(--iron-dim));
+  }
+  .divider::after{background:linear-gradient(90deg, var(--iron-dim), transparent);}
+  .divider svg{width:34px;height:34px;color:var(--bronze-dim);flex:0 0 auto;}
 
   /* ---------- GATE ---------- */
   .gate{
     position:fixed; inset:0; z-index:50;
     display:flex; align-items:center; justify-content:center;
     background:
-      radial-gradient(ellipse at center, #1c130a 0%, #070503 80%);
+      radial-gradient(ellipse at center, #101314 0%, #030404 82%);
     text-align:center;
     padding:1.5rem;
     transition:opacity .9s ease, visibility .9s ease;
   }
   .gate.hidden{opacity:0; visibility:hidden; pointer-events:none;}
   .gate-inner{max-width:34rem;}
-  .gate-emblem{width:96px;height:96px;margin:0 auto 1.2rem;display:block;filter:drop-shadow(0 0 14px rgba(205,165,69,.35));}
-  .gate h1{font-size:clamp(1.4rem,4.5vw,2.1rem);}
+  .gate-emblem{width:104px;height:104px;margin:0 auto 1.2rem;display:block;filter:drop-shadow(0 0 16px rgba(156,33,24,.45));}
+  .gate h1{font-size:clamp(1.5rem,4.5vw,2.2rem);}
   .gate .en{font-size:.85rem; margin-top:.2rem;}
-  .gate-hint{color:var(--parchment-dim); font-size:.85rem; margin-top:1rem;}
+  .gate-hint{color:var(--bone-dim); font-size:.85rem; margin-top:1rem;}
 
   .rune-btn{
-    font-family:var(--serif);
-    background:linear-gradient(180deg,#3a2a15,#20160c);
-    border:1px solid var(--gold-dim);
-    color:var(--gold-bright);
-    padding:.9rem 1.8rem;
-    font-size:1rem;
-    letter-spacing:.05em;
+    font-family:var(--display);
+    font-weight:700;
+    background:linear-gradient(180deg,#22262a,#101314);
+    border:1px solid var(--iron);
+    color:var(--bronze-bright);
+    padding:1rem 2rem;
+    font-size:.95rem;
+    letter-spacing:.12em;
     text-transform:uppercase;
     cursor:pointer;
-    border-radius:2px;
-    box-shadow: var(--shadow-deep), inset 0 0 0 1px rgba(205,165,69,.15);
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    clip-path:var(--edge);
+    box-shadow: var(--shadow-deep), inset 0 0 0 1px rgba(163,121,47,.12);
+    transition:transform .12s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
     margin-top:1.6rem;
   }
-  .rune-btn .en{display:inline; font-size:.8em; color:var(--parchment-dim);}
+  .rune-btn .en{display:inline; font-size:.78em; color:var(--bone-dim);}
   .rune-btn:hover{
     transform:translateY(-2px);
-    background:linear-gradient(180deg,#4a3620,#241a0d);
-    box-shadow: var(--shadow-deep), 0 0 24px rgba(205,165,69,.35), inset 0 0 0 1px rgba(205,165,69,.35);
+    background:linear-gradient(180deg,#2c1210,#150807);
+    color:#f1c98f;
+    box-shadow: var(--shadow-deep), 0 0 26px rgba(156,33,24,.5), inset 0 0 0 1px rgba(156,33,24,.55);
   }
-  .rune-btn:active{transform:translateY(0);}
+  .rune-btn:active{transform:translateY(1px) scale(.98);}
 
   /* ---------- MUSIC TOGGLE ---------- */
   .music-toggle{
@@ -134,10 +166,10 @@
     right:1rem; bottom:1rem;
     z-index:40;
     width:54px;height:54px;
-    border-radius:50%;
-    border:1px solid var(--gold-dim);
-    background:radial-gradient(circle at 35% 30%, #3a2a15, #17110a 70%);
-    color:var(--gold-bright);
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    border:1px solid var(--iron);
+    background:radial-gradient(circle at 35% 30%, #22262a, #0a0c0d 70%);
+    color:var(--bronze-bright);
     font-size:1.3rem;
     display:flex;align-items:center;justify-content:center;
     cursor:pointer;
@@ -149,22 +181,32 @@
   .music-toggle.show{opacity:1; transform:scale(1);}
   .music-toggle.playing{animation:pulse 2.2s ease-in-out infinite;}
   @keyframes pulse{
-    0%,100%{box-shadow:var(--shadow-deep), 0 0 0 rgba(205,165,69,.0);}
-    50%{box-shadow:var(--shadow-deep), 0 0 16px rgba(205,165,69,.45);}
+    0%,100%{box-shadow:var(--shadow-deep), 0 0 0 rgba(156,33,24,.0);}
+    50%{box-shadow:var(--shadow-deep), 0 0 18px rgba(156,33,24,.55);}
   }
 
   /* ---------- HERO ---------- */
   .hero{
     min-height:100vh;
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
     text-align:center;
     padding:6rem 1.2rem 4rem;
     position:relative;
     background:
-      linear-gradient(180deg, rgba(10,8,6,0) 0%, var(--bg-0) 92%),
-      repeating-linear-gradient(90deg, var(--wood-1) 0 3px, var(--wood-2) 3px 6px);
+      linear-gradient(180deg, rgba(5,6,7,0) 0%, var(--bg-0) 94%),
+      linear-gradient(180deg, #101314 0%, #060708 60%);
+    overflow:hidden;
+  }
+  .hero .peaks{
+    position:absolute;
+    bottom:0; left:0;
+    width:100%;
+    height:34%;
+    color:#0a0c0d;
+    z-index:0;
   }
   .hero .ship{
     position:absolute;
@@ -172,8 +214,9 @@
     left:50%;
     transform:translateX(-50%);
     width:min(720px,90vw);
-    opacity:.16;
+    opacity:.14;
     z-index:0;
+    color:var(--iron);
   }
   .flame{
     position:absolute;
@@ -181,10 +224,10 @@
     width:22px;
     height:34px;
     border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-    background:radial-gradient(circle at 50% 70%, #fff2c4 0%, #ffb347 28%, #ff7a1a 55%, rgba(255,90,10,0) 78%);
-    filter:drop-shadow(0 0 14px rgba(255,140,40,.6));
+    background:radial-gradient(circle at 50% 70%, #ffe2b0 0%, #e8912f 30%, #9c2118 60%, rgba(156,33,24,0) 78%);
+    filter:drop-shadow(0 0 14px rgba(156,33,24,.55));
     animation:flicker 2.4s infinite ease-in-out;
-    opacity:.85;
+    opacity:.9;
   }
   .flame::after{
     content:"";
@@ -194,17 +237,36 @@
     left:8px;
     width:6px;
     height:46px;
-    background:linear-gradient(180deg,#5a4326,#241a10);
-    border-radius:2px;
+    background:linear-gradient(180deg,#3a3f42,#15181a);
     z-index:-1;
   }
   .flame.left{left:5%;}
   .flame.right{right:5%;}
   @keyframes flicker{
-    0%,100%{opacity:.85; transform:translateY(0) scaleY(1) scaleX(1);}
-    25%{opacity:.7; transform:translateY(-2px) scaleY(1.08) scaleX(.92);}
-    50%{opacity:.9; transform:translateY(1px) scaleY(.95) scaleX(1.06);}
-    75%{opacity:.75; transform:translateY(-1px) scaleY(1.04) scaleX(.97);}
+    0%,100%{opacity:.9; transform:translateY(0) scaleY(1) scaleX(1);}
+    25%{opacity:.72; transform:translateY(-2px) scaleY(1.08) scaleX(.92);}
+    50%{opacity:.95; transform:translateY(1px) scaleY(.95) scaleX(1.06);}
+    75%{opacity:.78; transform:translateY(-1px) scaleY(1.04) scaleX(.97);}
+  }
+
+  /* ---------- 3D EMBLEM ---------- */
+  #emblem-3d{
+    position:relative;
+    z-index:1;
+    width:min(280px,60vw);
+    height:min(280px,60vw);
+    margin:0 auto -1.2rem;
+    touch-action:none;
+  }
+  #emblem-3d canvas{display:block; width:100%; height:100%;}
+  #emblem-3d::after{
+    content:"";
+    position:absolute;
+    left:50%; bottom:6%;
+    width:55%; height:14%;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse at center, rgba(0,0,0,.65), transparent 72%);
+    z-index:-1;
   }
 
   .hero-content{position:relative; z-index:1; max-width:44rem;}
@@ -216,7 +278,7 @@
   .brand .dot{color:var(--blood-bright);}
   .brand-en{
     font-style:italic;
-    color:var(--parchment-dim);
+    color:var(--bone-dim);
     letter-spacing:.35em;
     text-transform:uppercase;
     font-size:.85rem;
@@ -225,12 +287,12 @@
   .welcome{font-size:clamp(1.3rem,4vw,1.9rem); margin-bottom:1.1rem;}
   .welcome .en{font-size:.6em; margin-top:.25em;}
   .tagline{
-    color:var(--parchment);
+    color:var(--bone);
     font-size:1.05rem;
     max-width:38rem;
     margin:0 auto;
   }
-  .tagline .en{margin-top:.6em; color:var(--parchment-dim); font-size:.92em;}
+  .tagline .en{margin-top:.6em; color:var(--bone-dim); font-size:.92em;}
 
   .cta-btn{
     display:inline-block;
@@ -248,14 +310,6 @@
   .section-head h2{font-size:clamp(1.4rem,4vw,1.9rem);}
   .section-head .en{font-size:.6em; margin-top:.3em;}
 
-  .divider{
-    text-align:center;
-    color:var(--gold-dim);
-    letter-spacing:.6em;
-    margin:0 auto 2.5rem;
-    font-size:.95rem;
-  }
-
   /* ---------- BENEFITS ---------- */
   .shield-list{
     list-style:none;
@@ -265,74 +319,90 @@
     gap:1.1rem;
   }
   .shield-list li{
+    position:relative;
     display:flex;
     gap:.9rem;
     align-items:flex-start;
-    background:linear-gradient(160deg, rgba(36,26,16,.75), rgba(20,14,9,.75));
-    border:1px solid rgba(205,165,69,.22);
-    border-radius:4px;
-    padding:1.1rem 1.2rem;
+    background:linear-gradient(160deg, rgba(21,24,26,.85), rgba(9,10,11,.85));
+    border:1px solid var(--iron-dim);
+    padding:1.2rem 1.3rem;
     box-shadow:var(--shadow-deep);
   }
   .shield-list svg{flex:0 0 auto; width:30px; height:30px; margin-top:.2rem;}
   .shield-list p{margin:0; font-size:.98rem;}
   .shield-list p.en{margin-top:.3rem; font-size:.85rem;}
 
+  /* riveted iron corner brackets, pure CSS */
+  .shield-list li::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top left / 13px 2px no-repeat,
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top left / 2px 13px no-repeat,
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top right / 13px 2px no-repeat,
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top right / 2px 13px no-repeat,
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom left / 13px 2px no-repeat,
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom left / 2px 13px no-repeat,
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom right / 13px 2px no-repeat,
+      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom right / 2px 13px no-repeat;
+  }
+
   /* ---------- FORM ---------- */
   .form-section{
     background:
-      linear-gradient(180deg, var(--bg-0), #100c08 40%, var(--bg-0)),
-      repeating-linear-gradient(90deg, var(--wood-1) 0 3px, var(--wood-2) 3px 6px);
+      linear-gradient(180deg, var(--bg-0), #0a0b0c 40%, var(--bg-0));
   }
   .scroll-card{
+    position:relative;
     max-width:38rem;
     margin:0 auto;
     background:
-      linear-gradient(160deg, rgba(233,220,189,.06), rgba(233,220,189,.02)),
+      linear-gradient(160deg, rgba(217,212,198,.05), rgba(217,212,198,.015)),
       var(--ink);
-    border:1px solid var(--gold-dim);
-    border-radius:6px;
+    border:1px solid var(--iron);
+    clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px);
     padding:2.4rem clamp(1.2rem,5vw,2.6rem);
-    box-shadow:var(--shadow-deep), inset 0 0 40px rgba(0,0,0,.4);
+    box-shadow:var(--shadow-deep), inset 0 0 50px rgba(0,0,0,.55);
     text-align:center;
   }
-  .form-sub{color:var(--parchment-dim); margin-bottom:2rem; font-size:.98rem;}
+  .form-sub{color:var(--bone-dim); margin-bottom:2rem; font-size:.98rem;}
   .form-sub .en{margin-top:.4em; font-size:.9em;}
 
   form{text-align:left; display:flex; flex-direction:column; gap:1.2rem;}
-  label{display:block; font-size:.92rem; color:var(--parchment-dim);}
-  label .en{font-size:.85em;}
+  label{display:block; font-size:.92rem; color:var(--bone-dim); text-transform:uppercase; letter-spacing:.04em; font-size:.82rem;}
+  label .en{font-size:.85em; text-transform:none;}
   input, textarea{
     width:100%;
-    margin-top:.45rem;
-    background:rgba(0,0,0,.35);
-    border:1px solid var(--iron);
-    border-bottom:2px solid var(--gold-dim);
-    color:var(--parchment);
+    margin-top:.5rem;
+    background:rgba(0,0,0,.45);
+    border:1px solid var(--iron-dim);
+    border-bottom:2px solid var(--bronze-dim);
+    color:var(--bone);
     font-family:var(--serif);
-    font-size:1rem;
-    padding:.65rem .7rem;
-    border-radius:2px;
+    font-size:1.05rem;
+    padding:.7rem .75rem;
   }
   input:focus, textarea:focus{
     outline:none;
-    border-color:var(--gold);
-    box-shadow:0 0 0 2px rgba(205,165,69,.18);
+    border-color:var(--bronze);
+    background:rgba(0,0,0,.6);
+    box-shadow:0 0 0 1px rgba(156,33,24,.35);
   }
   form .rune-btn{align-self:center; width:100%; max-width:16rem;}
   .consent{
     text-align:center;
     font-size:.78rem;
-    color:var(--parchment-dim);
+    color:var(--bone-dim);
     margin-top:.4rem;
   }
 
   #form-result{
     margin-top:1.6rem;
     padding:1.2rem;
-    border:1px dashed var(--gold-dim);
-    border-radius:4px;
-    background:rgba(122,33,21,.12);
+    border:1px solid var(--blood-bright);
+    background:rgba(90,15,12,.15);
     font-size:.92rem;
     text-align:left;
   }
@@ -340,22 +410,21 @@
   #form-result pre{
     white-space:pre-wrap;
     word-break:break-word;
-    background:rgba(0,0,0,.35);
+    background:rgba(0,0,0,.45);
     padding:.8rem;
-    border-radius:3px;
     font-family:var(--serif);
-    color:var(--parchment);
+    color:var(--bone);
     margin:.6rem 0;
+    border-left:2px solid var(--bronze-dim);
   }
   .result-links{display:flex; gap:.7rem; flex-wrap:wrap; margin-top:.6rem;}
   .result-links a, .result-links button{
     font-family:var(--serif);
     font-size:.86rem;
-    color:var(--gold-bright);
-    background:rgba(205,165,69,.1);
-    border:1px solid var(--gold-dim);
+    color:var(--bronze-bright);
+    background:rgba(163,121,47,.1);
+    border:1px solid var(--bronze-dim);
     padding:.5rem .8rem;
-    border-radius:3px;
     text-decoration:none;
     cursor:pointer;
   }
@@ -370,30 +439,31 @@
     margin-top:1.6rem;
   }
   .chieftain-card{
+    position:relative;
     display:flex;
     align-items:center;
-    gap:.6rem;
+    gap:.7rem;
     text-decoration:none;
-    color:var(--parchment);
-    background:linear-gradient(160deg, rgba(36,26,16,.8), rgba(20,14,9,.8));
-    border:1px solid rgba(205,165,69,.3);
-    border-radius:4px;
-    padding:.9rem 1.3rem;
+    color:var(--bone);
+    background:linear-gradient(160deg, rgba(21,24,26,.9), rgba(9,10,11,.9));
+    border:1px solid var(--iron);
+    clip-path:var(--edge);
+    padding:1rem 1.4rem;
     box-shadow:var(--shadow-deep);
-    transition:transform .15s ease, border-color .15s ease;
+    transition:transform .15s ease, border-color .15s ease, box-shadow .2s ease;
   }
-  .chieftain-card:hover{transform:translateY(-2px); border-color:var(--gold);}
+  .chieftain-card:hover{transform:translateY(-2px); border-color:var(--blood-bright); box-shadow:var(--shadow-deep), 0 0 20px rgba(156,33,24,.35);}
   .chieftain-card svg{width:22px;height:22px;}
-  .chieftain-card .name{display:block; color:var(--gold-bright); font-size:.95rem;}
-  .chieftain-card .handle{display:block; font-size:.82rem; color:var(--parchment-dim);}
+  .chieftain-card .name{display:block; color:var(--bronze-bright); font-size:.95rem; font-family:var(--display); letter-spacing:.03em;}
+  .chieftain-card .handle{display:block; font-size:.82rem; color:var(--bone-dim);}
 
   footer{
     text-align:center;
     padding:3rem 1.2rem 4rem;
-    color:var(--parchment-dim);
+    color:var(--bone-dim);
     font-size:.85rem;
   }
-  footer .brand-mini{color:var(--gold); letter-spacing:.2em; text-transform:uppercase; font-size:.8rem; margin-bottom:.6rem;}
+  footer .brand-mini{color:var(--bronze); letter-spacing:.2em; text-transform:uppercase; font-size:.8rem; margin-bottom:.6rem; font-family:var(--display);}
 
   @media (max-width:640px){
     .shield-list{grid-template-columns:1fr;}
@@ -460,13 +530,23 @@
       <path d="M60 150 C 120 165 280 165 340 150" stroke-width="2"/>
     </g>
   </symbol>
+  <symbol id="ico-axes-cross" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M10 8 L54 52 M10 8 C22 8 26 16 21 23 L14 30"/>
+      <path d="M54 8 L10 52 M54 8 C42 8 38 16 43 23 L50 30"/>
+      <path d="M10 52 L4 58 M54 52 L60 58"/>
+    </g>
+  </symbol>
+  <symbol id="ico-peaks" viewBox="0 0 400 100" preserveAspectRatio="none">
+    <path d="M0 100 L0 60 L40 20 L70 45 L110 5 L150 50 L190 25 L230 55 L270 15 L310 48 L350 22 L400 60 L400 100 Z" fill="currentColor"/>
+  </symbol>
 </defs>
 </svg>
 
 <!-- Gate: click to enter, starts the music -->
 <div class="gate" id="gate">
   <div class="gate-inner">
-    <svg class="gate-emblem" viewBox="0 0 100 100"><use href="#ico-compass"/></svg>
+    <svg class="gate-emblem" viewBox="0 0 100 100" style="color:var(--iron)"><use href="#ico-compass"/></svg>
     <h1>Войти в чертог 549</h1>
     <p class="en">Enter the hall of 549</p>
     <button class="rune-btn" id="enter-btn" type="button">
@@ -479,9 +559,12 @@
 <button class="music-toggle" id="music-toggle" aria-label="Включить/выключить музыку">🔇</button>
 
 <header class="hero">
+  <svg class="peaks" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><use href="#ico-peaks"/></svg>
   <div class="flame left" aria-hidden="true"></div>
   <div class="flame right" aria-hidden="true"></div>
   <svg class="ship" viewBox="0 0 400 200" aria-hidden="true"><use href="#ico-ship"/></svg>
+
+  <div id="emblem-3d" aria-hidden="true"></div>
 
   <div class="hero-content">
     <div class="runes">ᛝ ᚱ ᚨ ᚷ ᚾ ᚨ ᚱ ᛟ ᚲ ᛝ</div>
@@ -502,49 +585,49 @@
   </div>
   <ul class="shield-list">
     <li>
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-plane"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-plane"/></svg>
       <div>
         <p>Живые активные чаты в игре, Телеграме и Дискорде</p>
         <p class="en">Active chats in the game, Telegram and Discord</p>
       </div>
     </li>
     <li>
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-horn"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-horn"/></svg>
       <div>
         <p>Творческие конкурсы и мероприятия, чтобы не скучать в межсезонье</p>
         <p class="en">Creative contests and events to have fun between KVK</p>
       </div>
     </li>
     <li>
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-shield"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-shield"/></svg>
       <div>
         <p>Адекватное руководство и прозрачная система управления</p>
         <p class="en">Loyal management and transparent management system</p>
       </div>
     </li>
     <li>
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-scroll"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-scroll"/></svg>
       <div>
         <p>Гайды, советы и подсказки по ивентам и саморазвитию</p>
         <p class="en">Guides, tips and tricks on events and self-development</p>
       </div>
     </li>
     <li>
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-scroll"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-scroll"/></svg>
       <div>
         <p>Письма и метки от R4/R5 — вы всегда будете знать, что происходит в игре</p>
         <p class="en">Letters and bookmarks from R4/R5 — you will always know what is happening in the game</p>
       </div>
     </li>
     <li>
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-hammer"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-hammer"/></svg>
       <div>
         <p>Уважение — запрет на оскорбления и обсуждение религии/политики. У нас отсутствуют внутренние конфликты</p>
         <p class="en">Respect. There is a ban on insults and discussion of religion/politics. We have no internal conflicts</p>
       </div>
     </li>
     <li>
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-axe"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-axe"/></svg>
       <div>
         <p>Бананы 🍌</p>
         <p class="en">Bananas 🍌</p>
@@ -553,7 +636,7 @@
   </ul>
 </section>
 
-<div class="divider">ᛒ ᛖ ᚱ ᛋ ᛖ ᚱ ᚲ</div>
+<div class="divider"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#ico-axes-cross"/></svg></div>
 
 <section class="section-shell form-section" id="form">
   <div class="scroll-card">
@@ -588,14 +671,14 @@
   </div>
   <div class="chieftains">
     <a class="chieftain-card" href="https://t.me/Keypoint21" target="_blank" rel="noopener">
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-plane"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-plane"/></svg>
       <span>
         <span class="name">21СаМец21</span>
         <span class="handle">@Keypoint21</span>
       </span>
     </a>
     <a class="chieftain-card" href="https://t.me/EvaZaltsman" target="_blank" rel="noopener">
-      <svg viewBox="0 0 48 48" style="color:var(--gold)"><use href="#ico-plane"/></svg>
+      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-plane"/></svg>
       <span>
         <span class="name">Кэтрин</span>
         <span class="handle">@EvaZaltsman</span>
@@ -609,6 +692,121 @@
   <div class="brand-mini">549 · Migration</div>
   <p>Чертог клана 549 — здесь начинается ваш новый поход.</p>
 </footer>
+
+<script type="module">
+// Floating 3D Mjölnir in the hero — forged low-poly, rune-branded, tilts with the pointer.
+// Fails silently (leaves the hero without the emblem) if WebGL or the CDN import is unavailable.
+try {
+  const THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js');
+  const container = document.getElementById('emblem-3d');
+
+  // drawn as vector strokes (not a font glyph) so the rune renders identically
+  // on every device regardless of which fonts happen to be installed
+  function runeTexture(color){
+    const c = document.createElement('canvas');
+    c.width = c.height = 256;
+    const ctx = c.getContext('2d');
+    ctx.strokeStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 26;
+    ctx.lineWidth = 15;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    // Algiz rune (protection) — a stem with two branches, always available
+    ctx.beginPath();
+    ctx.moveTo(128, 214); ctx.lineTo(128, 108);
+    ctx.moveTo(128, 108); ctx.lineTo(68, 42);
+    ctx.moveTo(128, 108); ctx.lineTo(188, 42);
+    ctx.stroke();
+    return new THREE.CanvasTexture(c);
+  }
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+  camera.position.set(0, 0.25, 4.4);
+  camera.lookAt(0, 0.05, 0);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setClearColor(0x000000, 0);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  container.appendChild(renderer.domElement);
+
+  scene.add(new THREE.AmbientLight(0x0c0e10, 0.6));
+  const key = new THREE.DirectionalLight(0xffb066, 1.5);
+  key.position.set(2.2, 3, 2.6);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0x9c2118, 1.3);
+  rim.position.set(-2.4, -0.6, -3);
+  scene.add(rim);
+  const fill = new THREE.DirectionalLight(0x5a6470, 0.35);
+  fill.position.set(-3, 2, 1.5);
+  scene.add(fill);
+
+  const hammer = new THREE.Group();
+
+  const steel = new THREE.MeshStandardMaterial({ color: 0x6b7278, metalness: 0.88, roughness: 0.32 });
+  const head = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.64, 0.64), steel);
+  head.position.y = 0.9;
+  hammer.add(head);
+
+  const runeMat = new THREE.MeshBasicMaterial({ map: runeTexture('#c9433a'), transparent: true, depthWrite: false });
+  const runeFront = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.42), runeMat);
+  runeFront.position.set(0, 0.9, 0.325);
+  hammer.add(runeFront);
+  const runeBack = runeFront.clone();
+  runeBack.position.z = -0.325;
+  runeBack.rotation.y = Math.PI;
+  hammer.add(runeBack);
+
+  const wood = new THREE.MeshStandardMaterial({ color: 0x2a2015, metalness: 0.05, roughness: 0.85 });
+  const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.105, 1.55, 8), wood);
+  handle.position.y = -0.17;
+  hammer.add(handle);
+
+  const leather = new THREE.MeshStandardMaterial({ color: 0x171310, roughness: 0.9 });
+  [0.47, 0.32].forEach(function(y){
+    const wrap = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.022, 8, 16), leather);
+    wrap.rotation.x = Math.PI / 2;
+    wrap.position.y = y;
+    hammer.add(wrap);
+  });
+
+  hammer.position.y = -0.15;
+  hammer.rotation.x = 0.12;
+  scene.add(hammer);
+
+  function fit(){
+    const w = container.clientWidth, h = container.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  fit();
+  new ResizeObserver(fit).observe(container);
+
+  let targetX = 0, targetY = 0, curX = 0, curY = 0;
+  window.addEventListener('pointermove', function(e){
+    targetX = (e.clientX / window.innerWidth) * 2 - 1;
+    targetY = (e.clientY / window.innerHeight) * 2 - 1;
+  }, { passive: true });
+
+  const clock = new THREE.Clock();
+  (function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    curX += (targetX - curX) * 0.04;
+    curY += (targetY - curY) * 0.04;
+    hammer.rotation.y = t * 0.35 + curX * 0.35;
+    hammer.rotation.z = curX * 0.12;
+    hammer.rotation.x = 0.12 + curY * 0.16;
+    hammer.position.y = -0.15 + Math.sin(t * 0.9) * 0.05;
+    renderer.render(scene, camera);
+  })();
+} catch (err) {
+  // no WebGL / CDN blocked — the hero still stands fine without the emblem
+}
+</script>
 
 <script>
 (function(){
