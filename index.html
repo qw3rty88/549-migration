@@ -23,7 +23,7 @@
     --bone:#d9d4c6;
     --bone-dim:#a9a394;
     --blood:#5a0f0c;
-    --blood-bright:#9c2118;
+    --blood-bright:#d1502e;
     --ink:#0e0f0f;
     --shadow-deep: 0 14px 34px rgba(0,0,0,.7);
     --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
@@ -33,6 +33,10 @@
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *, *::before, *::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
   body{
     margin:0;
     background:
@@ -64,7 +68,7 @@
     box-shadow: inset 0 0 20vw rgba(0,0,0,.85);
   }
 
-  h1,h2,h3{
+  h1,h2,h3,.gate-title{
     font-family:var(--display);
     font-weight:700;
     color:var(--bronze-bright);
@@ -131,7 +135,7 @@
   .gate.hidden{opacity:0; visibility:hidden; pointer-events:none;}
   .gate-inner{max-width:34rem;}
   .gate-emblem{width:104px;height:104px;margin:0 auto 1.2rem;display:block;filter:drop-shadow(0 0 16px rgba(156,33,24,.45));}
-  .gate h1{font-size:clamp(1.5rem,4.5vw,2.2rem);}
+  .gate-title{font-size:clamp(1.5rem,4.5vw,2.2rem);}
   .gate .en{font-size:.85rem; margin-top:.2rem;}
   .gate-hint{color:var(--bone-dim); font-size:.85rem; margin-top:1rem;}
 
@@ -146,6 +150,7 @@
     letter-spacing:.12em;
     text-transform:uppercase;
     cursor:pointer;
+    touch-action:manipulation;
     clip-path:var(--edge);
     box-shadow: var(--shadow-deep), inset 0 0 0 1px rgba(163,121,47,.12);
     transition:transform .12s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
@@ -159,6 +164,10 @@
     box-shadow: var(--shadow-deep), 0 0 26px rgba(156,33,24,.5), inset 0 0 0 1px rgba(156,33,24,.55);
   }
   .rune-btn:active{transform:translateY(1px) scale(.98);}
+  .rune-btn:focus-visible, .music-toggle:focus-visible, .chieftain-card:focus-visible, a:focus-visible{
+    outline:2px solid var(--blood-bright);
+    outline-offset:3px;
+  }
 
   /* ---------- MUSIC TOGGLE ---------- */
   .music-toggle{
@@ -173,6 +182,7 @@
     font-size:1.3rem;
     display:flex;align-items:center;justify-content:center;
     cursor:pointer;
+    touch-action:manipulation;
     box-shadow:var(--shadow-deep);
     opacity:0;
     transform:scale(.7);
@@ -540,6 +550,18 @@
   <symbol id="ico-peaks" viewBox="0 0 400 100" preserveAspectRatio="none">
     <path d="M0 100 L0 60 L40 20 L70 45 L110 5 L150 50 L190 25 L230 55 L270 15 L310 48 L350 22 L400 60 L400 100 Z" fill="currentColor"/>
   </symbol>
+  <symbol id="ico-sound-on" viewBox="0 0 32 32">
+    <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M4 12 H9 L16 6 V26 L9 20 H4 Z"/>
+      <path d="M21 11 C24 14 24 18 21 21 M25 7 C30 12 30 20 25 25"/>
+    </g>
+  </symbol>
+  <symbol id="ico-sound-off" viewBox="0 0 32 32">
+    <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M4 12 H9 L16 6 V26 L9 20 H4 Z"/>
+      <path d="M21 12 L28 20 M28 12 L21 20"/>
+    </g>
+  </symbol>
 </defs>
 </svg>
 
@@ -547,7 +569,7 @@
 <div class="gate" id="gate">
   <div class="gate-inner">
     <svg class="gate-emblem" viewBox="0 0 100 100" style="color:var(--iron)"><use href="#ico-compass"/></svg>
-    <h1>Войти в чертог 549</h1>
+    <div class="gate-title">Войти в чертог 549</div>
     <p class="en">Enter the hall of 549</p>
     <button class="rune-btn" id="enter-btn" type="button">
       Переступить порог <span class="en">/ Cross the threshold</span>
@@ -556,7 +578,9 @@
   </div>
 </div>
 
-<button class="music-toggle" id="music-toggle" aria-label="Включить/выключить музыку">🔇</button>
+<button class="music-toggle" id="music-toggle" aria-label="Включить музыку" aria-pressed="false">
+  <svg viewBox="0 0 32 32" width="22" height="22"><use href="#ico-sound-off"/></svg>
+</button>
 
 <header class="hero">
   <svg class="peaks" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><use href="#ico-peaks"/></svg>
@@ -644,8 +668,8 @@
     <p class="form-sub">Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊<span class="en">Tell us about yourself so that we can prepare the best place for you 😊</span></p>
 
     <form id="migration-form">
-      <label>Ник в игре<span class="en">/ Nickname in the game</span>
-        <input type="text" name="nickname" required autocomplete="off">
+      <label>Ник в игре <span aria-hidden="true">*</span><span class="en">/ Nickname in the game</span>
+        <input type="text" name="nickname" required autocomplete="off" aria-required="true">
       </label>
       <label>Из какого вы сервера?<span class="en">/ Which server are you from?</span>
         <input type="text" name="server" autocomplete="off">
@@ -657,10 +681,10 @@
         <input type="text" name="farms" autocomplete="off">
       </label>
       <button type="submit" class="rune-btn">Отправить</button>
-      <p class="consent">Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
+      <p class="consent">* обязательное поле / * required field<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
     </form>
 
-    <div id="form-result" hidden></div>
+    <div id="form-result" hidden aria-live="polite"></div>
   </div>
 </section>
 
@@ -785,12 +809,20 @@ try {
   fit();
   new ResizeObserver(fit).observe(container);
 
-  let targetX = 0, targetY = 0, curX = 0, curY = 0;
-  window.addEventListener('pointermove', function(e){
-    targetX = (e.clientX / window.innerWidth) * 2 - 1;
-    targetY = (e.clientY / window.innerHeight) * 2 - 1;
-  }, { passive: true });
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  let targetX = 0, targetY = 0, curX = 0, curY = 0;
+  if (!reduceMotion) {
+    window.addEventListener('pointermove', function(e){
+      targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      targetY = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+  }
+
+  if (reduceMotion) {
+    // static render: no continuous rotation/bob for users who asked for less motion
+    renderer.render(scene, camera);
+  } else {
   const clock = new THREE.Clock();
   (function animate(){
     requestAnimationFrame(animate);
@@ -803,6 +835,7 @@ try {
     hammer.position.y = -0.15 + Math.sin(t * 0.9) * 0.05;
     renderer.render(scene, camera);
   })();
+  }
 } catch (err) {
   // no WebGL / CDN blocked — the hero still stands fine without the emblem
 }
@@ -815,10 +848,13 @@ try {
   var enterBtn = document.getElementById('enter-btn');
   var toggle = document.getElementById('music-toggle');
 
+  var toggleIconUse = toggle.querySelector('use');
   function showToggle(playing){
     toggle.classList.add('show');
     toggle.classList.toggle('playing', playing);
-    toggle.textContent = playing ? '🔊' : '🔇';
+    toggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    toggle.setAttribute('aria-label', playing ? 'Выключить музыку' : 'Включить музыку');
+    toggleIconUse.setAttribute('href', playing ? '#ico-sound-on' : '#ico-sound-off');
   }
 
   function startMusic(){
