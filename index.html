@@ -171,6 +171,25 @@
   .icon-neon{width:1.35rem; height:1.35rem; flex-shrink:0;}
   .icon-neon-amber{color:#ffaa00; filter:drop-shadow(0 0 5px rgba(255,170,0,.85));}
   .icon-neon-ice{color:#00f0ff; filter:drop-shadow(0 0 5px rgba(0,240,255,.85));}
+
+  /* hero-flanking character art: white backgrounds removed via multiply blend
+     (works because the hero backdrop behind them is dark, not literal alpha),
+     with a soft bottom fade so the crop edge doesn't look like a hard cutout.
+     multiply can only ever darken - result is capped at the backdrop's own
+     brightness - so on a near-black page a plain multiply crushes the whole
+     figure to near-invisible. .hero-glow-pool lifts the local backdrop with a
+     warm radial light first, giving multiply something bright enough to show
+     real contrast against (and it doubles as "warriors lit from below/behind"). */
+  .hero-glow-pool{
+    background:radial-gradient(ellipse 60% 75% at 50% 65%, rgba(255,190,120,.55) 0%, rgba(200,120,50,.28) 45%, rgba(120,60,20,0) 78%);
+    filter:blur(2px);
+  }
+  .hero-figure{
+    mix-blend-mode:multiply;
+    -webkit-mask-image:linear-gradient(to bottom, #000 68%, transparent 100%);
+    mask-image:linear-gradient(to bottom, #000 68%, transparent 100%);
+    filter:brightness(1.25) contrast(1.1) saturate(1.1);
+  }
 </style>
 </head>
 <body class="bg-charcoal text-fg antialiased overflow-x-hidden">
@@ -245,8 +264,14 @@
 <main class="px-4 sm:px-6 lg:px-8">
 
   <!-- Hero -->
-  <section id="top" class="relative min-h-screen flex items-center justify-center pt-24 pb-14">
-    <div class="w-full max-w-6xl mx-auto p-6 sm:p-10 lg:p-14">
+  <section id="top" class="relative min-h-screen flex items-center justify-center pt-24 pb-14 overflow-hidden">
+    <div class="hero-glow-pool hidden xl:block absolute left-[130px] bottom-[10px] w-[260px] h-[280px] z-0 pointer-events-none"></div>
+    <img src="hero-l2.webp" alt="" aria-hidden="true" class="hero-figure hidden xl:block absolute left-[150px] bottom-[26px] w-[170px] z-0 opacity-85 pointer-events-none select-none">
+    <div class="hero-glow-pool hidden lg:block absolute left-[-30px] bottom-[-20px] w-[330px] h-[350px] z-[1] pointer-events-none"></div>
+    <img src="hero-l.webp" alt="" aria-hidden="true" class="hero-figure hidden lg:block absolute left-0 bottom-0 w-[240px] xl:w-[280px] z-[2] opacity-100 pointer-events-none select-none">
+    <div class="hero-glow-pool hidden lg:block absolute right-[-30px] bottom-[-20px] w-[330px] h-[350px] z-[1] pointer-events-none"></div>
+    <img src="hero-r.webp" alt="" aria-hidden="true" class="hero-figure hidden lg:block absolute right-0 bottom-0 w-[240px] xl:w-[280px] z-[2] opacity-100 pointer-events-none select-none">
+    <div class="relative z-10 w-full max-w-6xl mx-auto p-6 sm:p-10 lg:p-14">
       <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-10 items-center">
         <div>
           <div class="rune-framed rune-framed-amber inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/5 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber mb-6">
