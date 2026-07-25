@@ -3,858 +3,446 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>549 · Миграция — Чертог клана</title>
-<meta name="description" content="549. Миграция — присоединяйтесь к клану 549. Суровый чертог, взаимопомощь и голосовые чаты для координации.">
+<title>549 · Миграция — вступи в клан</title>
+<meta name="description" content="549 · Миграция — живое сообщество, прозрачное руководство и голосовые чаты для координации. Подай заявку на миграцию в 549.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg-0:#050607;
-    --bg-1:#0c0e10;
-    --stone-1:#15181a;
-    --stone-2:#0d0f10;
-    --iron:#565f66;
-    --iron-dim:#33393d;
-    --steel:#8b96a0;
-    --bronze:#a3792f;
-    --bronze-bright:#c99a4a;
-    --bronze-dim:#5f4d26;
-    --bone:#d9d4c6;
-    --bone-dim:#a9a394;
-    --blood:#5a0f0c;
-    --blood-bright:#d1502e;
-    --ink:#0e0f0f;
-    --shadow-deep: 0 14px 34px rgba(0,0,0,.7);
-    --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
-    --display: 'Cinzel', 'EB Garamond', Georgia, serif;
-    --edge: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  }
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  *{box-sizing:border-box;}
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          charcoal: '#0d0e12',
+          'charcoal-deep': '#090a0f',
+          ice: '#3fd8ff',
+          ember: '#ff5500',
+          amber: '#ffaa00',
+          fg: '#e6e9ef',
+          'fg-muted': '#9aa3b2',
+        },
+        fontFamily: {
+          display: ['Cinzel', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+        boxShadow: {
+          'glow-ice': '0 0 26px rgba(63,216,255,.4)',
+          'glow-ember': '0 0 30px rgba(255,85,0,.55)',
+        },
+        keyframes: {
+          pulseBorder: {
+            '0%,100%': { boxShadow: '0 0 0 1px rgba(63,216,255,.3), 0 0 18px rgba(63,216,255,.25)' },
+            '50%':     { boxShadow: '0 0 0 1px rgba(63,216,255,.6), 0 0 30px rgba(63,216,255,.5)' },
+          },
+          emberPulse: {
+            '0%,100%': { boxShadow: '0 0 18px rgba(255,85,0,.45)' },
+            '50%':     { boxShadow: '0 0 34px rgba(255,120,20,.75)' },
+          },
+        },
+        animation: {
+          'pulse-border': 'pulseBorder 2.4s ease-in-out infinite',
+          'ember-pulse': 'emberPulse 2.2s ease-in-out infinite',
+        },
+      },
+    },
+  };
+</script>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+<style>
   html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;}
+  .font-display{font-family:'Cinzel',serif;}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *, *::before, *::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
   }
-  body{
-    margin:0;
-    background:
-      radial-gradient(ellipse at 50% -10%, #16191b 0%, var(--bg-1) 45%, var(--bg-0) 100%);
-    color:var(--bone);
-    font-family:var(--serif);
-    line-height:1.55;
-    overflow-x:hidden;
-  }
-
-  /* film-grain / stone texture, pure SVG noise, no external assets */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:2;
-    opacity:.11;
-    mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  /* vignette */
-  body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:3;
-    box-shadow: inset 0 0 20vw rgba(0,0,0,.85);
-  }
-
-  h1,h2,h3,.gate-title{
-    font-family:var(--display);
-    font-weight:700;
-    color:var(--bronze-bright);
-    text-transform:uppercase;
-    letter-spacing:.09em;
-    text-shadow:
-      0 1px 0 rgba(0,0,0,.9),
-      0 -1px 0 rgba(255,255,255,.04),
-      0 3px 10px rgba(0,0,0,.7);
-    margin:0 0 .3em;
-  }
-  .en{
-    display:block;
-    font-family:var(--serif);
-    font-style:italic;
-    text-transform:none;
-    letter-spacing:.02em;
-    color:var(--bone-dim);
-    font-weight:400;
-  }
-  p .en, span.en, label .en{display:inline; font-size:.92em;}
-
-  a{color:var(--bronze-bright);}
-
-  .runes{
-    letter-spacing:.5em;
-    color:var(--iron);
-    font-size:1rem;
-    text-align:center;
-    user-select:none;
-    font-family:'Segoe UI Historic','Segoe UI Symbol','Noto Sans Runic',var(--serif);
-  }
-
-  section, header, footer{position:relative; z-index:1;}
-
-  /* crossed-axes divider ornament */
-  .divider{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:1.1rem;
-    margin:0 auto 2.5rem;
-    color:var(--iron);
-  }
-  .divider::before, .divider::after{
-    content:"";
-    height:1px;
-    width:clamp(40px,14vw,140px);
-    background:linear-gradient(90deg, transparent, var(--iron-dim));
-  }
-  .divider::after{background:linear-gradient(90deg, var(--iron-dim), transparent);}
-  .divider svg{width:34px;height:34px;color:var(--bronze-dim);flex:0 0 auto;}
-
-  /* ---------- GATE ---------- */
-  .gate{
-    position:fixed; inset:0; z-index:50;
-    display:flex; align-items:center; justify-content:center;
-    background:
-      radial-gradient(ellipse at center, #101314 0%, #030404 82%);
-    text-align:center;
-    padding:1.5rem;
-    transition:opacity .9s ease, visibility .9s ease;
-  }
-  .gate.hidden{opacity:0; visibility:hidden; pointer-events:none;}
-  .gate-inner{max-width:34rem;}
-  .gate-emblem{width:104px;height:104px;margin:0 auto 1.2rem;display:block;filter:drop-shadow(0 0 16px rgba(156,33,24,.45));}
-  .gate-title{font-size:clamp(1.5rem,4.5vw,2.2rem);}
-  .gate .en{font-size:.85rem; margin-top:.2rem;}
-  .gate-hint{color:var(--bone-dim); font-size:.85rem; margin-top:1rem;}
-
-  .rune-btn{
-    font-family:var(--display);
-    font-weight:700;
-    background:linear-gradient(180deg,#22262a,#101314);
-    border:1px solid var(--iron);
-    color:var(--bronze-bright);
-    padding:1rem 2rem;
-    font-size:.95rem;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    cursor:pointer;
-    touch-action:manipulation;
-    clip-path:var(--edge);
-    box-shadow: var(--shadow-deep), inset 0 0 0 1px rgba(163,121,47,.12);
-    transition:transform .12s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
-    margin-top:1.6rem;
-  }
-  .rune-btn .en{display:inline; font-size:.78em; color:var(--bone-dim);}
-  .rune-btn:hover{
-    transform:translateY(-2px);
-    background:linear-gradient(180deg,#2c1210,#150807);
-    color:#f1c98f;
-    box-shadow: var(--shadow-deep), 0 0 26px rgba(156,33,24,.5), inset 0 0 0 1px rgba(156,33,24,.55);
-  }
-  .rune-btn:active{transform:translateY(1px) scale(.98);}
-  .rune-btn:focus-visible, .music-toggle:focus-visible, .chieftain-card:focus-visible, a:focus-visible{
-    outline:2px solid var(--blood-bright);
-    outline-offset:3px;
-  }
-
-  /* ---------- MUSIC TOGGLE ---------- */
-  .music-toggle{
-    position:fixed;
-    right:1rem; bottom:1rem;
-    z-index:40;
-    width:54px;height:54px;
-    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
-    border:1px solid var(--iron);
-    background:radial-gradient(circle at 35% 30%, #22262a, #0a0c0d 70%);
-    color:var(--bronze-bright);
-    font-size:1.3rem;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;
-    touch-action:manipulation;
-    box-shadow:var(--shadow-deep);
-    opacity:0;
-    transform:scale(.7);
-    transition:opacity .5s ease, transform .5s ease;
-  }
-  .music-toggle.show{opacity:1; transform:scale(1);}
-  .music-toggle.playing{animation:pulse 2.2s ease-in-out infinite;}
-  @keyframes pulse{
-    0%,100%{box-shadow:var(--shadow-deep), 0 0 0 rgba(156,33,24,.0);}
-    50%{box-shadow:var(--shadow-deep), 0 0 18px rgba(156,33,24,.55);}
-  }
-
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:6rem 1.2rem 4rem;
-    position:relative;
-    background:
-      linear-gradient(180deg, rgba(5,6,7,0) 0%, var(--bg-0) 94%),
-      linear-gradient(180deg, #101314 0%, #060708 60%);
-    overflow:hidden;
-  }
-  .hero .peaks{
-    position:absolute;
-    bottom:0; left:0;
-    width:100%;
-    height:34%;
-    color:#0a0c0d;
-    z-index:0;
-  }
-  .hero .ship{
-    position:absolute;
-    bottom:6%;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(720px,90vw);
-    opacity:.14;
-    z-index:0;
-    color:var(--iron);
-  }
-  .flame{
-    position:absolute;
-    top:10%;
-    width:22px;
-    height:34px;
-    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-    background:radial-gradient(circle at 50% 70%, #ffe2b0 0%, #e8912f 30%, #9c2118 60%, rgba(156,33,24,0) 78%);
-    filter:drop-shadow(0 0 14px rgba(156,33,24,.55));
-    animation:flicker 2.4s infinite ease-in-out;
-    opacity:.9;
-  }
-  .flame::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    bottom:-46px;
-    left:8px;
-    width:6px;
-    height:46px;
-    background:linear-gradient(180deg,#3a3f42,#15181a);
-    z-index:-1;
-  }
-  .flame.left{left:5%;}
-  .flame.right{right:5%;}
-  @keyframes flicker{
-    0%,100%{opacity:.9; transform:translateY(0) scaleY(1) scaleX(1);}
-    25%{opacity:.72; transform:translateY(-2px) scaleY(1.08) scaleX(.92);}
-    50%{opacity:.95; transform:translateY(1px) scaleY(.95) scaleX(1.06);}
-    75%{opacity:.78; transform:translateY(-1px) scaleY(1.04) scaleX(.97);}
-  }
-
-  /* ---------- 3D EMBLEM ---------- */
-  #emblem-3d{
-    position:relative;
-    z-index:1;
-    width:min(280px,60vw);
-    height:min(280px,60vw);
-    margin:0 auto -1.2rem;
-    touch-action:none;
-  }
-  #emblem-3d canvas{display:block; width:100%; height:100%;}
-  #emblem-3d::after{
-    content:"";
-    position:absolute;
-    left:50%; bottom:6%;
-    width:55%; height:14%;
-    transform:translateX(-50%);
-    background:radial-gradient(ellipse at center, rgba(0,0,0,.65), transparent 72%);
-    z-index:-1;
-  }
-
-  .hero-content{position:relative; z-index:1; max-width:44rem;}
-  .brand{
-    font-size:clamp(2.4rem,8vw,4.4rem);
-    line-height:1;
-    margin-bottom:.15em;
-  }
-  .brand .dot{color:var(--blood-bright);}
-  .brand-en{
-    font-style:italic;
-    color:var(--bone-dim);
-    letter-spacing:.35em;
-    text-transform:uppercase;
-    font-size:.85rem;
-    margin:0 0 1.6rem;
-  }
-  .welcome{font-size:clamp(1.3rem,4vw,1.9rem); margin-bottom:1.1rem;}
-  .welcome .en{font-size:.6em; margin-top:.25em;}
-  .tagline{
-    color:var(--bone);
-    font-size:1.05rem;
-    max-width:38rem;
-    margin:0 auto;
-  }
-  .tagline .en{margin-top:.6em; color:var(--bone-dim); font-size:.92em;}
-
-  .cta-btn{
-    display:inline-block;
-    margin-top:2.2rem;
-    text-decoration:none;
-  }
-
-  /* ---------- SECTION SHELL ---------- */
-  .section-shell{
-    max-width:56rem;
-    margin:0 auto;
-    padding:5rem 1.4rem;
-  }
-  .section-head{text-align:center; margin-bottom:2.6rem;}
-  .section-head h2{font-size:clamp(1.4rem,4vw,1.9rem);}
-  .section-head .en{font-size:.6em; margin-top:.3em;}
-
-  /* ---------- BENEFITS ---------- */
-  .shield-list{
-    list-style:none;
-    margin:0; padding:0;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:1.1rem;
-  }
-  .shield-list li{
-    position:relative;
-    display:flex;
-    gap:.9rem;
-    align-items:flex-start;
-    background:linear-gradient(160deg, rgba(21,24,26,.85), rgba(9,10,11,.85));
-    border:1px solid var(--iron-dim);
-    padding:1.2rem 1.3rem;
-    box-shadow:var(--shadow-deep);
-  }
-  .shield-list svg{flex:0 0 auto; width:30px; height:30px; margin-top:.2rem;}
-  .shield-list p{margin:0; font-size:.98rem;}
-  .shield-list p.en{margin-top:.3rem; font-size:.85rem;}
-
-  /* riveted iron corner brackets, pure CSS */
-  .shield-list li::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    background:
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top left / 13px 2px no-repeat,
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top left / 2px 13px no-repeat,
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top right / 13px 2px no-repeat,
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) top right / 2px 13px no-repeat,
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom left / 13px 2px no-repeat,
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom left / 2px 13px no-repeat,
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom right / 13px 2px no-repeat,
-      linear-gradient(var(--bronze-dim),var(--bronze-dim)) bottom right / 2px 13px no-repeat;
-  }
-
-  /* ---------- FORM ---------- */
-  .form-section{
-    background:
-      linear-gradient(180deg, var(--bg-0), #0a0b0c 40%, var(--bg-0));
-  }
-  .scroll-card{
-    position:relative;
-    max-width:38rem;
-    margin:0 auto;
-    background:
-      linear-gradient(160deg, rgba(217,212,198,.05), rgba(217,212,198,.015)),
-      var(--ink);
-    border:1px solid var(--iron);
-    clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px);
-    padding:2.4rem clamp(1.2rem,5vw,2.6rem);
-    box-shadow:var(--shadow-deep), inset 0 0 50px rgba(0,0,0,.55);
-    text-align:center;
-  }
-  .form-sub{color:var(--bone-dim); margin-bottom:2rem; font-size:.98rem;}
-  .form-sub .en{margin-top:.4em; font-size:.9em;}
-
-  form{text-align:left; display:flex; flex-direction:column; gap:1.2rem;}
-  label{display:block; font-size:.92rem; color:var(--bone-dim); text-transform:uppercase; letter-spacing:.04em; font-size:.82rem;}
-  label .en{font-size:.85em; text-transform:none;}
-  input, textarea{
-    width:100%;
-    margin-top:.5rem;
-    background:rgba(0,0,0,.45);
-    border:1px solid var(--iron-dim);
-    border-bottom:2px solid var(--bronze-dim);
-    color:var(--bone);
-    font-family:var(--serif);
-    font-size:1.05rem;
-    padding:.7rem .75rem;
-  }
-  input:focus, textarea:focus{
-    outline:none;
-    border-color:var(--bronze);
-    background:rgba(0,0,0,.6);
-    box-shadow:0 0 0 1px rgba(156,33,24,.35);
-  }
-  form .rune-btn{align-self:center; width:100%; max-width:16rem;}
-  .consent{
-    text-align:center;
-    font-size:.78rem;
-    color:var(--bone-dim);
-    margin-top:.4rem;
-  }
-
-  #form-result{
-    margin-top:1.6rem;
-    padding:1.2rem;
-    border:1px solid var(--blood-bright);
-    background:rgba(90,15,12,.15);
-    font-size:.92rem;
-    text-align:left;
-  }
-  #form-result h3{font-size:1rem; margin-bottom:.5rem;}
-  #form-result pre{
-    white-space:pre-wrap;
-    word-break:break-word;
-    background:rgba(0,0,0,.45);
-    padding:.8rem;
-    font-family:var(--serif);
-    color:var(--bone);
-    margin:.6rem 0;
-    border-left:2px solid var(--bronze-dim);
-  }
-  .result-links{display:flex; gap:.7rem; flex-wrap:wrap; margin-top:.6rem;}
-  .result-links a, .result-links button{
-    font-family:var(--serif);
-    font-size:.86rem;
-    color:var(--bronze-bright);
-    background:rgba(163,121,47,.1);
-    border:1px solid var(--bronze-dim);
-    padding:.5rem .8rem;
-    text-decoration:none;
-    cursor:pointer;
-  }
-
-  /* ---------- CONTACTS ---------- */
-  .contacts{text-align:center;}
-  .chieftains{
-    display:flex;
-    gap:1rem;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:1.6rem;
-  }
-  .chieftain-card{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:.7rem;
-    text-decoration:none;
-    color:var(--bone);
-    background:linear-gradient(160deg, rgba(21,24,26,.9), rgba(9,10,11,.9));
-    border:1px solid var(--iron);
-    clip-path:var(--edge);
-    padding:1rem 1.4rem;
-    box-shadow:var(--shadow-deep);
-    transition:transform .15s ease, border-color .15s ease, box-shadow .2s ease;
-  }
-  .chieftain-card:hover{transform:translateY(-2px); border-color:var(--blood-bright); box-shadow:var(--shadow-deep), 0 0 20px rgba(156,33,24,.35);}
-  .chieftain-card svg{width:22px;height:22px;}
-  .chieftain-card .name{display:block; color:var(--bronze-bright); font-size:.95rem; font-family:var(--display); letter-spacing:.03em;}
-  .chieftain-card .handle{display:block; font-size:.82rem; color:var(--bone-dim);}
-
-  footer{
-    text-align:center;
-    padding:3rem 1.2rem 4rem;
-    color:var(--bone-dim);
-    font-size:.85rem;
-  }
-  footer .brand-mini{color:var(--bronze); letter-spacing:.2em; text-transform:uppercase; font-size:.8rem; margin-bottom:.6rem; font-family:var(--display);}
-
-  @media (max-width:640px){
-    .shield-list{grid-template-columns:1fr;}
-  }
+  .tilt-card{transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease; transform-style:preserve-3d; will-change:transform;}
+  ::selection{background:rgba(63,216,255,.3); color:#fff;}
 </style>
 </head>
-<body>
+<body class="bg-charcoal text-fg antialiased overflow-x-hidden">
 
 <audio id="hall-music" src="549.mp3" loop preload="auto"></audio>
 
-<!-- SVG symbol sprite -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-<defs>
-  <symbol id="ico-shield" viewBox="0 0 48 48">
-    <path d="M24 3 L42 9 V22 C42 33 34 41 24 45 C14 41 6 33 6 22 V9 Z" fill="none" stroke="currentColor" stroke-width="2.4"/>
-    <path d="M24 12 L24 30 M16 21 L32 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="ico-axe" viewBox="0 0 48 48">
-    <path d="M14 6 C24 6 27 15 22 22 L10 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-    <path d="M10 34 L6 42 L14 38" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="ico-helm" viewBox="0 0 48 48">
-    <path d="M10 26 C10 14 16 8 24 8 C32 8 38 14 38 26 L38 30 H10 Z" fill="none" stroke="currentColor" stroke-width="2.2"/>
-    <path d="M4 14 C10 10 16 12 18 16 M44 14 C38 10 32 12 30 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-    <path d="M24 8 V30" stroke="currentColor" stroke-width="2"/>
-  </symbol>
-  <symbol id="ico-hammer" viewBox="0 0 48 48">
-    <rect x="10" y="8" width="28" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/>
-    <path d="M24 20 V42" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="ico-horn" viewBox="0 0 48 48">
-    <path d="M8 10 C20 8 38 16 40 30 C41 36 36 40 30 38 C22 35 16 24 16 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-    <circle cx="10" cy="10" r="3.4" fill="none" stroke="currentColor" stroke-width="2.2"/>
-  </symbol>
-  <symbol id="ico-scroll" viewBox="0 0 48 48">
-    <path d="M10 10 C6 10 6 16 10 16 H36 C40 16 40 10 36 10 Z" fill="none" stroke="currentColor" stroke-width="2.2"/>
-    <path d="M10 16 V32 C10 36 6 36 6 40 C6 42 8 44 12 44 H36 C40 44 42 42 42 40 C42 36 38 36 38 32 V16" fill="none" stroke="currentColor" stroke-width="2.2"/>
-  </symbol>
-  <symbol id="ico-plane" viewBox="0 0 48 48">
-    <path d="M6 24 L42 8 L30 40 L23 26 L6 24 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-    <path d="M23 26 L42 8" stroke="currentColor" stroke-width="2.2"/>
-  </symbol>
-  <symbol id="ico-compass" viewBox="0 0 100 100">
-    <g fill="none" stroke="currentColor" stroke-width="1.6">
-      <circle cx="50" cy="50" r="46"/>
-      <circle cx="50" cy="50" r="34"/>
-      <path d="M50 4 L50 96 M4 50 L96 50 M17 17 L83 83 M83 17 L17 83"/>
-      <path d="M50 12 L56 46 L50 40 L44 46 Z" fill="currentColor" stroke="none"/>
-      <path d="M50 88 L56 54 L50 60 L44 54 Z" fill="currentColor" stroke="none"/>
-      <path d="M12 50 L46 44 L40 50 L46 56 Z" fill="currentColor" stroke="none"/>
-      <path d="M88 50 L54 44 L60 50 L54 56 Z" fill="currentColor" stroke="none"/>
-      <circle cx="50" cy="50" r="4" fill="currentColor" stroke="none"/>
-    </g>
-  </symbol>
-  <symbol id="ico-ship" viewBox="0 0 400 200">
-    <g fill="none" stroke="currentColor" stroke-width="3">
-      <path d="M10 150 C 80 190, 320 190, 390 150 L 360 170 C 280 195, 120 195, 40 170 Z" fill="currentColor" stroke="none"/>
-      <path d="M60 150 C 50 90 90 40 90 40" stroke-linecap="round"/>
-      <path d="M90 40 C 70 40 55 55 60 70" stroke-linecap="round"/>
-      <path d="M340 150 C 350 90 310 40 310 40" stroke-linecap="round"/>
-      <path d="M310 40 C 330 40 345 55 340 70" stroke-linecap="round"/>
-      <path d="M200 30 V150" stroke-width="4"/>
-      <path d="M120 60 C 160 45 240 45 280 60 L 260 100 C 220 88 180 88 140 100 Z"/>
-      <path d="M60 150 C 120 165 280 165 340 150" stroke-width="2"/>
-    </g>
-  </symbol>
-  <symbol id="ico-axes-cross" viewBox="0 0 64 64">
-    <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M10 8 L54 52 M10 8 C22 8 26 16 21 23 L14 30"/>
-      <path d="M54 8 L10 52 M54 8 C42 8 38 16 43 23 L50 30"/>
-      <path d="M10 52 L4 58 M54 52 L60 58"/>
-    </g>
-  </symbol>
-  <symbol id="ico-peaks" viewBox="0 0 400 100" preserveAspectRatio="none">
-    <path d="M0 100 L0 60 L40 20 L70 45 L110 5 L150 50 L190 25 L230 55 L270 15 L310 48 L350 22 L400 60 L400 100 Z" fill="currentColor"/>
-  </symbol>
-  <symbol id="ico-sound-on" viewBox="0 0 32 32">
-    <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M4 12 H9 L16 6 V26 L9 20 H4 Z"/>
-      <path d="M21 11 C24 14 24 18 21 21 M25 7 C30 12 30 20 25 25"/>
-    </g>
-  </symbol>
-  <symbol id="ico-sound-off" viewBox="0 0 32 32">
-    <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M4 12 H9 L16 6 V26 L9 20 H4 Z"/>
-      <path d="M21 12 L28 20 M28 12 L21 20"/>
-    </g>
-  </symbol>
-</defs>
-</svg>
+<!-- 3D ember particle field -->
+<canvas id="particles-bg" class="fixed inset-0 -z-20" aria-hidden="true"></canvas>
+<div class="fixed inset-0 -z-10 bg-gradient-to-b from-charcoal-deep/60 via-charcoal-deep/30 to-charcoal-deep/90" aria-hidden="true"></div>
+<div class="fixed inset-0 -z-10 pointer-events-none" style="background:radial-gradient(ellipse at 50% 0%, transparent 0%, rgba(9,10,15,.7) 70%)" aria-hidden="true"></div>
 
-<!-- Gate: click to enter, starts the music -->
-<div class="gate" id="gate">
-  <div class="gate-inner">
-    <svg class="gate-emblem" viewBox="0 0 100 100" style="color:var(--iron)"><use href="#ico-compass"/></svg>
-    <div class="gate-title">Войти в чертог 549</div>
-    <p class="en">Enter the hall of 549</p>
-    <button class="rune-btn" id="enter-btn" type="button">
-      Переступить порог <span class="en">/ Cross the threshold</span>
+<!-- Gate: click to enter, starts the hall music -->
+<div id="gate" class="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal-deep/95 backdrop-blur-md px-6 transition-opacity duration-700">
+  <div class="max-w-md w-full text-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 sm:p-10 shadow-glow-ice animate-pulse-border">
+    <svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto mb-5 text-ice drop-shadow-[0_0_14px_rgba(63,216,255,.6)]" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="50" cy="50" r="46"/>
+        <circle cx="50" cy="50" r="34"/>
+        <path d="M50 4 L50 96 M4 50 L96 50 M17 17 L83 83 M83 17 L17 83"/>
+        <path d="M50 12 L56 46 L50 40 L44 46 Z" fill="currentColor" stroke="none"/>
+        <path d="M50 88 L56 54 L50 60 L44 54 Z" fill="currentColor" stroke="none"/>
+        <path d="M12 50 L46 44 L40 50 L46 56 Z" fill="currentColor" stroke="none"/>
+        <path d="M88 50 L54 44 L60 50 L54 56 Z" fill="currentColor" stroke="none"/>
+        <circle cx="50" cy="50" r="4" fill="currentColor" stroke="none"/>
+      </g>
+    </svg>
+    <div class="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-fg">Войти в 549</div>
+    <p class="text-fg-muted text-sm italic mt-1">Enter 549</p>
+    <button id="enter-btn" type="button" class="mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-ember px-8 py-3 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember animate-ember-pulse hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-deep">
+      <i data-lucide="flame" class="w-5 h-5" aria-hidden="true"></i>
+      Переступить порог
     </button>
-    <p class="gate-hint">🔊 ᛝ труби в боевой рог — на входе зазвучит музыка чертога ᛝ</p>
+    <p class="text-fg-muted text-xs mt-4">🔊 Со звуком — на входе зазвучит музыка чертога</p>
   </div>
 </div>
 
-<button class="music-toggle" id="music-toggle" aria-label="Включить музыку" aria-pressed="false">
-  <svg viewBox="0 0 32 32" width="22" height="22"><use href="#ico-sound-off"/></svg>
+<!-- floating music toggle -->
+<button id="music-toggle" aria-label="Включить музыку" aria-pressed="false"
+  class="fixed bottom-5 right-5 z-40 w-13 h-13 flex items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-lg text-ice opacity-0 scale-75 transition-all duration-500 hover:border-ice/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
+  style="width:52px;height:52px;">
+  <i data-lucide="volume-x" class="w-5 h-5 pointer-events-none" aria-hidden="true"></i>
 </button>
 
-<header class="hero">
-  <svg class="peaks" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><use href="#ico-peaks"/></svg>
-  <div class="flame left" aria-hidden="true"></div>
-  <div class="flame right" aria-hidden="true"></div>
-  <svg class="ship" viewBox="0 0 400 200" aria-hidden="true"><use href="#ico-ship"/></svg>
+<!-- Header -->
+<header class="fixed top-0 inset-x-0 z-30 border-b border-white/5 bg-charcoal/70 backdrop-blur-lg">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 font-display font-bold text-lg sm:text-xl tracking-wide bg-gradient-to-b from-fg via-ice to-fg-muted bg-clip-text text-transparent">
+      <svg viewBox="0 0 32 32" class="w-6 h-6 text-ice flex-shrink-0" aria-hidden="true"><path d="M16 3 V29 M16 12 L6 4 M16 12 L26 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+      549 · МИГРАЦИЯ
+    </a>
 
-  <div id="emblem-3d" aria-hidden="true"></div>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-fg-muted">
+      <a href="#top" class="hover:text-ice transition-colors">Главная</a>
+      <a href="#features" class="hover:text-ice transition-colors">Особенности</a>
+      <a href="#chieftains" class="hover:text-ice transition-colors">Хёвдинги</a>
+      <a href="#contacts" class="hover:text-ice transition-colors">Контакты</a>
+    </nav>
 
-  <div class="hero-content">
-    <div class="runes">ᛝ ᚱ ᚨ ᚷ ᚾ ᚨ ᚱ ᛟ ᚲ ᛝ</div>
-    <h1 class="brand">549 <span class="dot">·</span> Миграция</h1>
-    <p class="brand-en">549 · Migration</p>
-    <h2 class="welcome">Добро пожаловать в 549<span class="en">Welcome to 549</span></h2>
-    <p class="tagline">
-      Тёплый вайб, взаимопомощь на каждом шагу и голосовые чаты для координации. В 549 не боятся идти в бой и терять войска, потому что играют вместе.
-      <span class="en">A cool vibe, mutual assistance at every turn and voice chats for coordination. In 549 we are not afraid to go into battle and lose troops, because we play together.</span>
-    </p>
-    <a href="#form" class="cta-btn rune-btn">Подать заявку на миграцию <span class="en">/ Apply for migration</span></a>
+    <a href="#form" class="hidden sm:inline-flex items-center gap-2 rounded-lg bg-ember px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep hover:brightness-110 active:scale-[.98] transition shadow-glow-ember/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+      Подать заявку
+    </a>
+
+    <button id="menu-toggle" class="md:hidden text-fg p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice rounded" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+      <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
+    </button>
   </div>
+
+  <nav id="mobile-menu" hidden class="md:hidden border-t border-white/5 bg-charcoal-deep/95 backdrop-blur-lg px-5 py-4 flex flex-col gap-4 text-fg-muted">
+    <a href="#top" class="hover:text-ice transition-colors">Главная</a>
+    <a href="#features" class="hover:text-ice transition-colors">Особенности</a>
+    <a href="#chieftains" class="hover:text-ice transition-colors">Хёвдинги</a>
+    <a href="#contacts" class="hover:text-ice transition-colors">Контакты</a>
+    <a href="#form" class="inline-flex items-center justify-center gap-2 rounded-lg bg-ember px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep">Подать заявку</a>
+  </nav>
 </header>
 
-<section class="section-shell benefits">
-  <div class="section-head">
-    <h2>Что вас ждёт в 549?<span class="en">What can you expect in 549?</span></h2>
+<main>
+
+  <!-- Hero -->
+  <section id="top" class="relative min-h-screen flex items-center justify-center text-center px-5 pt-28 pb-16">
+    <div class="relative z-10 max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 rounded-full border border-ice/30 bg-ice/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-ice mb-6">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
+        Набор открыт
+      </div>
+
+      <h1 class="font-display font-black uppercase leading-[1.05] text-4xl sm:text-6xl lg:text-7xl tracking-wide text-fg drop-shadow-[0_0_28px_rgba(63,216,255,.35)]">
+        Добро пожаловать<br><span class="bg-gradient-to-r from-ice via-fg to-amber bg-clip-text text-transparent">в 549</span>
+      </h1>
+      <p class="font-display text-fg-muted text-sm sm:text-base tracking-[0.3em] uppercase mt-3">Welcome to 549</p>
+
+      <p class="mt-8 text-base sm:text-lg text-fg-muted max-w-2xl mx-auto leading-relaxed">
+        Тёплый вайб, взаимопомощь на каждом шагу и голосовые чаты для координации. В 549 не боятся идти в бой и терять войска, потому что играют вместе.
+        <span class="block italic text-fg-muted/70 mt-3 text-sm sm:text-base">A cool vibe, mutual assistance at every turn and voice chats for coordination. In 549 we are not afraid to go into battle and lose troops, because we play together.</span>
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#form" class="inline-flex items-center gap-2 rounded-xl bg-ember px-8 py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+          <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
+          Подать заявку на миграцию
+        </a>
+        <a href="#features" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 backdrop-blur px-8 py-4 font-display font-semibold uppercase tracking-wider text-fg hover:border-ice/50 hover:text-ice transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+          <i data-lucide="chevron-down" class="w-5 h-5" aria-hidden="true"></i>
+          Что вас ждёт
+        </a>
+      </div>
+
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-3">
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-xs sm:text-sm text-fg-muted">
+          <i data-lucide="message-circle" class="w-4 h-4 text-ice" aria-hidden="true"></i> 3 канала связи: игра / Telegram / Discord
+        </div>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-xs sm:text-sm text-fg-muted">
+          <i data-lucide="shield-check" class="w-4 h-4 text-ice" aria-hidden="true"></i> Прозрачное руководство
+        </div>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-xs sm:text-sm text-fg-muted">
+          🍌 Свои традиции
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="relative px-5 sm:px-8 py-24">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide text-fg">Что вас ждёт в 549</h2>
+        <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">What can you expect in 549</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="tilt-grid">
+        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="message-circle" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Живые активные чаты в игре, Телеграме и Дискорде</p>
+          <p class="text-fg-muted text-sm italic mt-2">Active chats in the game, Telegram and Discord</p>
+        </div>
+        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="sparkles" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Творческие конкурсы и мероприятия, чтобы не скучать в межсезонье</p>
+          <p class="text-fg-muted text-sm italic mt-2">Creative contests and events to have fun between KVK</p>
+        </div>
+        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="shield-check" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Адекватное руководство и прозрачная система управления</p>
+          <p class="text-fg-muted text-sm italic mt-2">Loyal management and transparent management system</p>
+        </div>
+        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="book-open" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Гайды, советы и подсказки по ивентам и саморазвитию</p>
+          <p class="text-fg-muted text-sm italic mt-2">Guides, tips and tricks on events and self-development</p>
+        </div>
+        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="bell" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Письма и метки от R4/R5 — вы всегда будете знать, что происходит в игре</p>
+          <p class="text-fg-muted text-sm italic mt-2">Letters and bookmarks from R4/R5 — you will always know what is happening in the game</p>
+        </div>
+        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="users" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Уважение — запрет на оскорбления и обсуждение религии/политики. У нас отсутствуют внутренние конфликты</p>
+          <p class="text-fg-muted text-sm italic mt-2">Respect. There is a ban on insults and discussion of religion/politics. We have no internal conflicts</p>
+        </div>
+        <div class="tilt-card group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 hover:border-ice/40 hover:shadow-glow-ice sm:col-span-2 lg:col-span-1">
+          <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="smile" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
+          <p class="font-semibold text-fg">Бананы 🍌</p>
+          <p class="text-fg-muted text-sm italic mt-2">Bananas 🍌</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chieftains ("heroes" section, adapted to the real contacts) -->
+  <section id="chieftains" class="relative px-5 sm:px-8 py-24">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide text-fg">Хёвдинги 549</h2>
+      <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Chieftains of 549</p>
+      <p class="text-fg-muted mt-4 max-w-xl mx-auto">Свяжитесь напрямую — они ведут приём заявок и отвечают на вопросы о миграции.</p>
+
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-8 text-center hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-ice/20 to-ember/20 border border-white/10 flex items-center justify-center mb-4">
+            <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
+          </div>
+          <div class="font-display font-bold text-lg text-fg">21СаМец21</div>
+          <div class="text-xs uppercase tracking-widest text-amber mt-1">Хёвдинг · Приём заявок</div>
+          <div class="text-ice text-sm mt-3 inline-flex items-center gap-1.5 group-hover:underline"><i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>@Keypoint21</div>
+        </a>
+        <a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-8 text-center hover:border-ember/50 hover:shadow-glow-ember transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-ice/20 to-ember/20 border border-white/10 flex items-center justify-center mb-4">
+            <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
+          </div>
+          <div class="font-display font-bold text-lg text-fg">Кэтрин</div>
+          <div class="text-xs uppercase tracking-widest text-amber mt-1">Хёвдинг · Поддержка</div>
+          <div class="text-ice text-sm mt-3 inline-flex items-center gap-1.5 group-hover:underline"><i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>@EvaZaltsman</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application form -->
+  <section id="form" class="relative px-5 sm:px-8 py-24">
+    <div class="max-w-xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 shadow-glow-ice/40">
+      <div class="text-center">
+        <h2 class="font-display font-bold uppercase text-2xl sm:text-3xl tracking-wide text-fg">Подайте заявку на миграцию</h2>
+        <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Apply for migration</p>
+        <p class="text-fg-muted mt-4 text-sm sm:text-base">Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊<br><span class="italic">Tell us about yourself so that we can prepare the best place for you 😊</span></p>
+      </div>
+
+      <form id="migration-form" class="mt-8 flex flex-col gap-5 text-left">
+        <label class="block text-sm text-fg-muted">
+          Ник в игре <span aria-hidden="true" class="text-ember">*</span><span class="italic text-fg-muted/70"> / Nickname in the game</span>
+          <input type="text" name="nickname" required aria-required="true" autocomplete="off"
+            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
+        </label>
+        <label class="block text-sm text-fg-muted">
+          Из какого вы сервера?<span class="italic text-fg-muted/70"> / Which server are you from?</span>
+          <input type="text" name="server" autocomplete="off"
+            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
+        </label>
+        <label class="block text-sm text-fg-muted">
+          Сила аккаунта и Количество очков убийства<span class="italic text-fg-muted/70"> / What is your account might and how many kill points do you have?</span>
+          <input type="text" name="power" autocomplete="off"
+            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
+        </label>
+        <label class="block text-sm text-fg-muted">
+          Сколько у вас ферм? Есть ли на них Т5?<span class="italic text-fg-muted/70"> / How many farm accounts do you have? Do they have T5 on them?</span>
+          <input type="text" name="farms" autocomplete="off"
+            class="mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 px-4 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition">
+        </label>
+
+        <button type="submit" class="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-ember px-8 py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+          <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
+          Отправить
+        </button>
+        <p class="text-fg-muted text-xs text-center">* обязательное поле / * required field<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
+      </form>
+
+      <div id="form-result" hidden aria-live="polite" class="mt-6 rounded-xl border border-ember/40 bg-ember/10 p-5 text-left text-sm"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Contacts / Footer -->
+<footer id="contacts" class="relative border-t border-white/5 px-5 sm:px-8 py-14">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="font-display font-bold uppercase tracking-widest text-fg mb-1">549 · Миграция</div>
+    <p class="text-fg-muted text-sm mb-6">Чертог клана 549 — здесь начинается ваш новый поход.</p>
+    <div class="flex items-center justify-center gap-4">
+      <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" aria-label="Telegram: 21СаМец21"
+        class="w-11 h-11 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-ice hover:border-ice/50 hover:shadow-glow-ice transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+        <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
+      </a>
+    </div>
+    <p class="text-fg-muted/60 text-xs mt-8">Made for the 549 clan · не является официальным сайтом какой-либо игры</p>
   </div>
-  <ul class="shield-list">
-    <li>
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-plane"/></svg>
-      <div>
-        <p>Живые активные чаты в игре, Телеграме и Дискорде</p>
-        <p class="en">Active chats in the game, Telegram and Discord</p>
-      </div>
-    </li>
-    <li>
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-horn"/></svg>
-      <div>
-        <p>Творческие конкурсы и мероприятия, чтобы не скучать в межсезонье</p>
-        <p class="en">Creative contests and events to have fun between KVK</p>
-      </div>
-    </li>
-    <li>
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-shield"/></svg>
-      <div>
-        <p>Адекватное руководство и прозрачная система управления</p>
-        <p class="en">Loyal management and transparent management system</p>
-      </div>
-    </li>
-    <li>
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-scroll"/></svg>
-      <div>
-        <p>Гайды, советы и подсказки по ивентам и саморазвитию</p>
-        <p class="en">Guides, tips and tricks on events and self-development</p>
-      </div>
-    </li>
-    <li>
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-scroll"/></svg>
-      <div>
-        <p>Письма и метки от R4/R5 — вы всегда будете знать, что происходит в игре</p>
-        <p class="en">Letters and bookmarks from R4/R5 — you will always know what is happening in the game</p>
-      </div>
-    </li>
-    <li>
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-hammer"/></svg>
-      <div>
-        <p>Уважение — запрет на оскорбления и обсуждение религии/политики. У нас отсутствуют внутренние конфликты</p>
-        <p class="en">Respect. There is a ban on insults and discussion of religion/politics. We have no internal conflicts</p>
-      </div>
-    </li>
-    <li>
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-axe"/></svg>
-      <div>
-        <p>Бананы 🍌</p>
-        <p class="en">Bananas 🍌</p>
-      </div>
-    </li>
-  </ul>
-</section>
-
-<div class="divider"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#ico-axes-cross"/></svg></div>
-
-<section class="section-shell form-section" id="form">
-  <div class="scroll-card">
-    <h2>Подайте заявку на миграцию<span class="en">Apply for migration</span></h2>
-    <p class="form-sub">Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊<span class="en">Tell us about yourself so that we can prepare the best place for you 😊</span></p>
-
-    <form id="migration-form">
-      <label>Ник в игре <span aria-hidden="true">*</span><span class="en">/ Nickname in the game</span>
-        <input type="text" name="nickname" required autocomplete="off" aria-required="true">
-      </label>
-      <label>Из какого вы сервера?<span class="en">/ Which server are you from?</span>
-        <input type="text" name="server" autocomplete="off">
-      </label>
-      <label>Сила аккаунта и Количество очков убийства<span class="en">/ What is your account might and how many kill points do you have?</span>
-        <input type="text" name="power" autocomplete="off">
-      </label>
-      <label>Сколько у вас ферм? Есть ли на них Т5?<span class="en">/ How many farm accounts do you have? Do they have T5 on them?</span>
-        <input type="text" name="farms" autocomplete="off">
-      </label>
-      <button type="submit" class="rune-btn">Отправить</button>
-      <p class="consent">* обязательное поле / * required field<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
-    </form>
-
-    <div id="form-result" hidden aria-live="polite"></div>
-  </div>
-</section>
-
-<section class="section-shell contacts">
-  <div class="section-head">
-    <h2>Контакты<span class="en">Contacts</span></h2>
-    <h3 style="font-size:1rem;margin-top:.6rem;">Телеграм<span class="en" style="font-size:.9em;">Telegram</span></h3>
-  </div>
-  <div class="chieftains">
-    <a class="chieftain-card" href="https://t.me/Keypoint21" target="_blank" rel="noopener">
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-plane"/></svg>
-      <span>
-        <span class="name">21СаМец21</span>
-        <span class="handle">@Keypoint21</span>
-      </span>
-    </a>
-    <a class="chieftain-card" href="https://t.me/EvaZaltsman" target="_blank" rel="noopener">
-      <svg viewBox="0 0 48 48" style="color:var(--bronze)"><use href="#ico-plane"/></svg>
-      <span>
-        <span class="name">Кэтрин</span>
-        <span class="handle">@EvaZaltsman</span>
-      </span>
-    </a>
-  </div>
-</section>
-
-<footer>
-  <div class="runes" style="margin-bottom:1rem;">ᛝ ᛒ ᛖ ᚱ ᛋ ᛖ ᚱ ᚲ ᛝ</div>
-  <div class="brand-mini">549 · Migration</div>
-  <p>Чертог клана 549 — здесь начинается ваш новый поход.</p>
 </footer>
 
 <script type="module">
-// Floating 3D Mjölnir in the hero — forged low-poly, rune-branded, tilts with the pointer.
-// Fails silently (leaves the hero without the emblem) if WebGL or the CDN import is unavailable.
-try {
-  const THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js');
-  const container = document.getElementById('emblem-3d');
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 
-  // drawn as vector strokes (not a font glyph) so the rune renders identically
-  // on every device regardless of which fonts happen to be installed
-  function runeTexture(color){
+try {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('particles-bg');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 20;
+
+  const COUNT = reduceMotion ? 200 : 900;
+  const positions = new Float32Array(COUNT * 3);
+  const speeds = new Float32Array(COUNT);
+  const sways = new Float32Array(COUNT);
+  const colors = new Float32Array(COUNT * 3);
+
+  const colorA = new THREE.Color('#ff6b00');
+  const colorB = new THREE.Color('#ffaa00');
+
+  for (let i = 0; i < COUNT; i++) {
+    positions[i * 3 + 0] = (Math.random() - 0.5) * 40;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 24;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+    speeds[i] = 0.4 + Math.random() * 0.8;
+    sways[i] = Math.random() * Math.PI * 2;
+    const c = colorA.clone().lerp(colorB, Math.random());
+    colors[i * 3] = c.r; colors[i * 3 + 1] = c.g; colors[i * 3 + 2] = c.b;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  function sparkTexture() {
     const c = document.createElement('canvas');
-    c.width = c.height = 256;
+    c.width = c.height = 64;
     const ctx = c.getContext('2d');
-    ctx.strokeStyle = color;
-    ctx.shadowColor = color;
-    ctx.shadowBlur = 26;
-    ctx.lineWidth = 15;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    // Algiz rune (protection) — a stem with two branches, always available
-    ctx.beginPath();
-    ctx.moveTo(128, 214); ctx.lineTo(128, 108);
-    ctx.moveTo(128, 108); ctx.lineTo(68, 42);
-    ctx.moveTo(128, 108); ctx.lineTo(188, 42);
-    ctx.stroke();
+    const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, 'rgba(255,255,255,1)');
+    g.addColorStop(0.3, 'rgba(255,200,120,0.9)');
+    g.addColorStop(1, 'rgba(255,120,0,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, 64, 64);
     return new THREE.CanvasTexture(c);
   }
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-  camera.position.set(0, 0.25, 4.4);
-  camera.lookAt(0, 0.05, 0);
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  container.appendChild(renderer.domElement);
-
-  scene.add(new THREE.AmbientLight(0x0c0e10, 0.6));
-  const key = new THREE.DirectionalLight(0xffb066, 1.5);
-  key.position.set(2.2, 3, 2.6);
-  scene.add(key);
-  const rim = new THREE.DirectionalLight(0x9c2118, 1.3);
-  rim.position.set(-2.4, -0.6, -3);
-  scene.add(rim);
-  const fill = new THREE.DirectionalLight(0x5a6470, 0.35);
-  fill.position.set(-3, 2, 1.5);
-  scene.add(fill);
-
-  const hammer = new THREE.Group();
-
-  const steel = new THREE.MeshStandardMaterial({ color: 0x6b7278, metalness: 0.88, roughness: 0.32 });
-  const head = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.64, 0.64), steel);
-  head.position.y = 0.9;
-  hammer.add(head);
-
-  const runeMat = new THREE.MeshBasicMaterial({ map: runeTexture('#c9433a'), transparent: true, depthWrite: false });
-  const runeFront = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.42), runeMat);
-  runeFront.position.set(0, 0.9, 0.325);
-  hammer.add(runeFront);
-  const runeBack = runeFront.clone();
-  runeBack.position.z = -0.325;
-  runeBack.rotation.y = Math.PI;
-  hammer.add(runeBack);
-
-  const wood = new THREE.MeshStandardMaterial({ color: 0x2a2015, metalness: 0.05, roughness: 0.85 });
-  const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.105, 1.55, 8), wood);
-  handle.position.y = -0.17;
-  hammer.add(handle);
-
-  const leather = new THREE.MeshStandardMaterial({ color: 0x171310, roughness: 0.9 });
-  [0.47, 0.32].forEach(function(y){
-    const wrap = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.022, 8, 16), leather);
-    wrap.rotation.x = Math.PI / 2;
-    wrap.position.y = y;
-    hammer.add(wrap);
+  const material = new THREE.PointsMaterial({
+    size: 0.34,
+    map: sparkTexture(),
+    vertexColors: true,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
   });
 
-  hammer.position.y = -0.15;
-  hammer.rotation.x = 0.12;
-  scene.add(hammer);
+  const points = new THREE.Points(geo, material);
+  scene.add(points);
 
-  function fit(){
-    const w = container.clientWidth, h = container.clientHeight;
-    if (!w || !h) return;
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-  fit();
-  new ResizeObserver(fit).observe(container);
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  let targetX = 0, targetY = 0, curX = 0, curY = 0;
+  let mouseX = 0, mouseY = 0, camX = 0, camY = 0;
   if (!reduceMotion) {
-    window.addEventListener('pointermove', function(e){
-      targetX = (e.clientX / window.innerWidth) * 2 - 1;
-      targetY = (e.clientY / window.innerHeight) * 2 - 1;
+    window.addEventListener('pointermove', function (e) {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = (e.clientY / window.innerHeight) * 2 - 1;
     }, { passive: true });
   }
 
-  if (reduceMotion) {
-    // static render: no continuous rotation/bob for users who asked for less motion
-    renderer.render(scene, camera);
-  } else {
+  window.addEventListener('resize', function () {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  const posAttr = geo.attributes.position;
   const clock = new THREE.Clock();
-  (function animate(){
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-    curX += (targetX - curX) * 0.04;
-    curY += (targetY - curY) * 0.04;
-    hammer.rotation.y = t * 0.35 + curX * 0.35;
-    hammer.rotation.z = curX * 0.12;
-    hammer.rotation.x = 0.12 + curY * 0.16;
-    hammer.position.y = -0.15 + Math.sin(t * 0.9) * 0.05;
+
+  function renderFrame() {
+    if (!reduceMotion) {
+      const t = clock.getElapsedTime();
+      for (let i = 0; i < COUNT; i++) {
+        let y = posAttr.array[i * 3 + 1] + speeds[i] * 0.01;
+        if (y > 12) y = -12;
+        posAttr.array[i * 3 + 1] = y;
+        posAttr.array[i * 3 + 0] += Math.sin(t * 0.5 + sways[i]) * 0.003;
+      }
+      posAttr.needsUpdate = true;
+      camX += (mouseX * 1.2 - camX) * 0.02;
+      camY += (-mouseY * 0.8 - camY) * 0.02;
+      camera.position.x = camX;
+      camera.position.y = camY;
+      camera.lookAt(0, 0, 0);
+    }
     renderer.render(scene, camera);
-  })();
+    if (!reduceMotion) requestAnimationFrame(renderFrame);
   }
+  renderFrame();
 } catch (err) {
-  // no WebGL / CDN blocked — the hero still stands fine without the emblem
+  // no WebGL: page still works fine, just without the ember field
 }
 </script>
 
 <script>
 (function(){
+  if (window.lucide) { lucide.createIcons(); } else { window.addEventListener('load', function(){ if (window.lucide) lucide.createIcons(); }); }
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- audio gate ---
   var audio = document.getElementById('hall-music');
   var gate = document.getElementById('gate');
   var enterBtn = document.getElementById('enter-btn');
   var toggle = document.getElementById('music-toggle');
+  var toggleIcon = toggle.querySelector('i');
 
-  var toggleIconUse = toggle.querySelector('use');
   function showToggle(playing){
-    toggle.classList.add('show');
-    toggle.classList.toggle('playing', playing);
+    toggle.classList.remove('opacity-0','scale-75');
+    toggle.classList.add('opacity-100','scale-100');
     toggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
     toggle.setAttribute('aria-label', playing ? 'Выключить музыку' : 'Включить музыку');
-    toggleIconUse.setAttribute('href', playing ? '#ico-sound-on' : '#ico-sound-off');
+    toggleIcon.setAttribute('data-lucide', playing ? 'volume-2' : 'volume-x');
+    if (window.lucide) lucide.createIcons();
   }
 
   function startMusic(){
@@ -865,19 +453,17 @@ try {
     } else {
       showToggle(true);
     }
-    gate.classList.add('hidden');
+    gate.classList.add('opacity-0','pointer-events-none');
+    setTimeout(function(){ gate.style.display = 'none'; }, 700);
   }
 
-  // try autoplay immediately; browsers that block it will reject the promise
-  // and the gate stays visible as the fallback "click to enter" gesture
   var auto = audio.play();
   if (auto && auto.catch) {
     auto.then(function(){
       showToggle(true);
-      gate.classList.add('hidden');
-    }).catch(function(){
-      // autoplay blocked: wait for the gate click
-    });
+      gate.classList.add('opacity-0','pointer-events-none');
+      setTimeout(function(){ gate.style.display = 'none'; }, 700);
+    }).catch(function(){ /* autoplay blocked: wait for the gate click */ });
   }
 
   enterBtn.addEventListener('click', startMusic);
@@ -891,8 +477,34 @@ try {
     }
   });
 
-  // migration application form: no backend, so we build a summary
-  // the visitor can copy and send straight to a chieftain on Telegram
+  // --- mobile menu ---
+  var menuToggle = document.getElementById('menu-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', function(){
+    var isHidden = mobileMenu.hasAttribute('hidden');
+    if (isHidden) { mobileMenu.removeAttribute('hidden'); menuToggle.setAttribute('aria-expanded','true'); }
+    else { mobileMenu.setAttribute('hidden',''); menuToggle.setAttribute('aria-expanded','false'); }
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mobileMenu.setAttribute('hidden',''); menuToggle.setAttribute('aria-expanded','false'); });
+  });
+
+  // --- 3D tilt on feature cards ---
+  if (!reduceMotion) {
+    document.querySelectorAll('.tilt-card').forEach(function(card){
+      card.addEventListener('pointermove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'perspective(700px) rotateX(' + (-py*8) + 'deg) rotateY(' + (px*8) + 'deg) translateY(-2px)';
+      });
+      card.addEventListener('pointerleave', function(){
+        card.style.transform = 'perspective(700px) rotateX(0) rotateY(0)';
+      });
+    });
+  }
+
+  // --- migration application form: no backend, build a copyable summary ---
   var form = document.getElementById('migration-form');
   var result = document.getElementById('form-result');
 
@@ -908,17 +520,17 @@ try {
 
     result.hidden = false;
     result.innerHTML =
-      '<h3>ᛝ Анкета готова / Application ready ᛝ</h3>' +
-      '<pre></pre>' +
-      '<p>Скопируйте анкету и отправьте одному из хёвдингов в Telegram.<br>' +
-      '<span class="en">Copy the application and send it to one of the chieftains on Telegram.</span></p>' +
-      '<div class="result-links">' +
-        '<button type="button" id="copy-btn">Копировать анкету / Copy</button>' +
-        '<a href="https://t.me/Keypoint21" target="_blank" rel="noopener">Написать 21СаМец21</a>' +
-        '<a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener">Написать Кэтрин</a>' +
+      '<h3 class="font-display font-bold uppercase tracking-wide text-fg mb-2">Анкета готова / Application ready</h3>' +
+      '<pre class="whitespace-pre-wrap break-words bg-charcoal-deep/60 rounded-lg p-4 text-fg-muted"></pre>' +
+      '<p class="text-fg-muted mt-3">Скопируйте анкету и отправьте одному из хёвдингов в Telegram.<br>' +
+      '<span class="italic">Copy the application and send it to one of the chieftains on Telegram.</span></p>' +
+      '<div class="flex flex-wrap gap-2 mt-3">' +
+        '<button type="button" id="copy-btn" class="rounded-lg border border-ice/30 bg-ice/10 text-ice px-4 py-2 text-xs font-semibold hover:bg-ice/20 transition">Копировать анкету / Copy</button>' +
+        '<a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="rounded-lg border border-white/15 bg-white/5 text-fg px-4 py-2 text-xs font-semibold hover:border-ice/40 transition">Написать 21СаМец21</a>' +
+        '<a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="rounded-lg border border-white/15 bg-white/5 text-fg px-4 py-2 text-xs font-semibold hover:border-ice/40 transition">Написать Кэтрин</a>' +
       '</div>';
     result.querySelector('pre').textContent = text;
-    result.scrollIntoView({behavior:'smooth', block:'center'});
+    result.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
 
     document.getElementById('copy-btn').addEventListener('click', function(){
       navigator.clipboard.writeText(text).then(function(){
