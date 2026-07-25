@@ -793,6 +793,9 @@ try {
       'result.copy_btn': 'Копировать анкету',
       'result.copied': 'Скопировано ✓',
       'result.write_to': 'Написать',
+      'result.sending': 'Отправляем заявку...',
+      'result.sent': 'Заявка отправлена ярлам ✓',
+      'result.send_error': 'Не удалось отправить автоматически — скопируйте анкету и отправьте вручную.',
     },
     en: {
       'meta.title': 'K549 | MIGRATION — transfer to kingdom #549',
@@ -863,6 +866,9 @@ try {
       'result.copy_btn': 'Copy application',
       'result.copied': 'Copied ✓',
       'result.write_to': 'Message',
+      'result.sending': 'Sending application...',
+      'result.sent': 'Application sent to the jarls ✓',
+      'result.send_error': 'Automatic send failed — copy the application and send it manually.',
     },
   };
 
@@ -993,7 +999,8 @@ try {
     });
   }
 
-  // --- migration application form: no backend, build a copyable summary ---
+  // --- migration application form: submits to Cloudflare Worker (Telegram + GitHub log), with copyable fallback ---
+  var WORKER_URL = 'https://k549-migration-form.sergey-belyaev88.workers.dev';
   var form = document.getElementById('migration-form');
   var result = document.getElementById('form-result');
 
@@ -1011,6 +1018,7 @@ try {
     result.hidden = false;
     result.innerHTML =
       '<h3 class="font-display font-bold uppercase tracking-wide text-fg mb-2">' + t['result.title'] + '</h3>' +
+      '<p id="submit-status" class="text-fg-muted mb-3">' + t['result.sending'] + '</p>' +
       '<pre class="whitespace-pre-wrap break-words bg-charcoal-deep/60 rounded-lg p-4 text-fg-muted font-stat"></pre>' +
       '<p class="text-fg-muted mt-3">' + t['result.copy_hint'] + '</p>' +
       '<div class="flex flex-wrap gap-2 mt-3">' +
@@ -1028,6 +1036,25 @@ try {
         btn.textContent = I18N[currentLang]['result.copied'];
         setTimeout(function(){ btn.textContent = old; }, 1800);
       });
+    });
+
+    fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nickname: data.get('nickname'),
+        server: data.get('server'),
+        power: data.get('power'),
+        farms: data.get('farms'),
+        lang: currentLang,
+      }),
+    }).then(function(res){
+      var status = document.getElementById('submit-status');
+      if (!status) return;
+      status.textContent = res.ok ? I18N[currentLang]['result.sent'] : I18N[currentLang]['result.send_error'];
+    }).catch(function(){
+      var status = document.getElementById('submit-status');
+      if (status) status.textContent = I18N[currentLang]['result.send_error'];
     });
   });
 })();
