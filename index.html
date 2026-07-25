@@ -565,10 +565,10 @@
         <input type="text" name="nickname" required autocomplete="off">
       </label>
       <label>Из какого вы сервера?<span class="en">/ Which server are you from?</span>
-        <input type="text" name="server" required autocomplete="off">
+        <input type="text" name="server" autocomplete="off">
       </label>
-      <label>Сила аккаунта и количество очков убийства<span class="en">/ What is your account might and how many kill points do you have?</span>
-        <input type="text" name="power" required autocomplete="off">
+      <label>Сила аккаунта и Количество очков убийства<span class="en">/ What is your account might and how many kill points do you have?</span>
+        <input type="text" name="power" autocomplete="off">
       </label>
       <label>Сколько у вас ферм? Есть ли на них Т5?<span class="en">/ How many farm accounts do you have? Do they have T5 on them?</span>
         <input type="text" name="farms" autocomplete="off">
@@ -668,8 +668,8 @@
     var text =
       'Заявка на миграцию в 549 / Migration application to 549\n' +
       'Ник в игре / Nickname: ' + data.get('nickname') + '\n' +
-      'Сервер / Server: ' + data.get('server') + '\n' +
-      'Сила и очки убийства / Might & kill points: ' + data.get('power') + '\n' +
+      'Сервер / Server: ' + (data.get('server') || '—') + '\n' +
+      'Сила и очки убийства / Might & kill points: ' + (data.get('power') || '—') + '\n' +
       'Фермы / Farm accounts: ' + (data.get('farms') || '—');
 
     result.hidden = false;
