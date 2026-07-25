@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K549 | MIGRATION — переходи на кингдом #549</title>
-<meta name="description" content="K549 · Migration — неофициальный фан-сайт сообщества кингдома #549 в Viking Rise. Сильный сервер, активные KVK, чёткая стратегия. Подай заявку на миграцию.">
+<title id="page-title">K549 | MIGRATION — переходи на кингдом #549</title>
+<meta id="page-description" name="description" content="K549 · Migration — неофициальный фан-сайт сообщества кингдома #549 в Viking Rise. Сильный сервер, активные KVK, чёткая стратегия. Подай заявку на миграцию.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -190,6 +190,11 @@
     mask-image:linear-gradient(to bottom, #000 68%, transparent 100%);
     filter:brightness(1.25) contrast(1.1) saturate(1.1);
   }
+
+  /* language switcher */
+  .lang-btn{color:#98a1b0;}
+  .lang-btn[aria-pressed="true"]{color:#00f0ff; background:rgba(0,240,255,.14);}
+  .lang-btn:hover{color:#e9ecf2;}
 </style>
 </head>
 <body class="bg-charcoal text-fg antialiased overflow-x-hidden">
@@ -211,17 +216,16 @@
         </g>
       </svg>
     </div>
-    <div class="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-fg">Войти на K549</div>
-    <p class="text-fg-muted text-sm italic mt-1">Enter K549</p>
+    <div class="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-fg" data-i18n="gate.title">Войти на K549</div>
     <button id="enter-btn" type="button" class="rune-framed rune-framed-amber mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-ember py-3 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember animate-ember-pulse hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-deep">
-      Переступить порог
+      <span data-i18n="gate.enter_btn">Переступить порог</span>
     </button>
-    <p class="text-fg-muted text-xs mt-4">🔊 Со звуком — на входе зазвучит музыка чертога</p>
+    <p class="text-fg-muted text-xs mt-4" data-i18n="gate.hint">🔊 Со звуком — на входе зазвучит музыка чертога</p>
   </div>
 </div>
 
 <!-- floating music toggle -->
-<button id="music-toggle" aria-label="Включить музыку" aria-pressed="false"
+<button id="music-toggle" data-i18n-aria-label="music.on" aria-label="Включить музыку" aria-pressed="false"
   class="fixed bottom-5 right-5 z-40 flex items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-lg text-ice opacity-0 scale-75 transition-all duration-500 hover:border-ice/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
   style="width:52px;height:52px;">
   <i data-lucide="volume-x" class="w-5 h-5 pointer-events-none" aria-hidden="true"></i>
@@ -229,35 +233,48 @@
 
 <!-- Header -->
 <header class="fixed top-0 inset-x-0 z-30 border-b border-white/5 bg-charcoal/70 backdrop-blur-lg">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-2 font-display font-bold text-lg sm:text-xl tracking-wide">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+    <a href="#top" class="flex items-center gap-2 font-display font-bold text-lg sm:text-xl tracking-wide flex-shrink-0">
       <svg viewBox="0 0 32 32" class="w-6 h-6 text-amber flex-shrink-0" aria-hidden="true"><path d="M16 3 V29 M16 12 L6 4 M16 12 L26 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
       <span class="text-metal">K549</span><span class="text-fg-muted font-normal text-sm ml-1 hidden sm:inline">| MIGRATION</span>
     </a>
 
     <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-fg-muted">
-      <a href="#top" class="hover:text-ice transition-colors">О сервере</a>
-      <a href="#features" class="hover:text-ice transition-colors">Преимущества</a>
-      <a href="#requirements" class="hover:text-ice transition-colors">Требования</a>
-      <a href="#chieftains" class="hover:text-ice transition-colors">Хёвдинги</a>
-      <a href="#form" class="hover:text-ice transition-colors">Связь</a>
+      <a href="#top" class="hover:text-ice transition-colors" data-i18n="nav.about">О сервере</a>
+      <a href="#features" class="hover:text-ice transition-colors" data-i18n="nav.features">Преимущества</a>
+      <a href="#requirements" class="hover:text-ice transition-colors" data-i18n="nav.requirements">Требования</a>
+      <a href="#chieftains" class="hover:text-ice transition-colors" data-i18n="nav.chieftains">Хёвдинги</a>
+      <a href="#form" class="hover:text-ice transition-colors" data-i18n="nav.contact">Связь</a>
     </nav>
 
-    <a href="#form" class="rune-framed rune-framed-amber hidden sm:inline-flex items-center gap-2 rounded-lg bg-ember py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
-      Подать заявку
-    </a>
+    <div class="flex items-center gap-3 ml-auto lg:ml-0">
+      <div class="lang-switch hidden sm:flex items-center gap-0.5 rounded-full border border-white/10 bg-white/5 p-1" role="group" aria-label="Language / Язык">
+        <i data-lucide="languages" class="w-3.5 h-3.5 text-fg-muted ml-1.5 mr-0.5" aria-hidden="true"></i>
+        <button type="button" class="lang-btn rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors" data-lang-btn="ru" aria-pressed="true">RU</button>
+        <button type="button" class="lang-btn rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors" data-lang-btn="en" aria-pressed="false">EN</button>
+      </div>
 
-    <button id="menu-toggle" class="lg:hidden text-fg p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice rounded" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
-      <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
-    </button>
+      <a href="#form" class="rune-framed rune-framed-amber hidden sm:inline-flex items-center gap-2 rounded-lg bg-ember py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
+        <span data-i18n="nav.cta">Подать заявку</span>
+      </a>
+
+      <button id="menu-toggle" class="lg:hidden text-fg p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice rounded" data-i18n-aria-label="nav.menu_open" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+        <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
 
   <nav id="mobile-menu" hidden class="lg:hidden border-t border-white/5 bg-charcoal-deep/95 backdrop-blur-lg px-5 py-4 flex-col gap-4 text-fg-muted">
-    <a href="#top" class="hover:text-ice transition-colors">О сервере</a>
-    <a href="#features" class="hover:text-ice transition-colors">Преимущества</a>
-    <a href="#requirements" class="hover:text-ice transition-colors">Требования</a>
-    <a href="#chieftains" class="hover:text-ice transition-colors">Хёвдинги</a>
-    <a href="#form" class="inline-flex items-center justify-center gap-2 rounded-lg bg-ember px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep">Подать заявку</a>
+    <a href="#top" class="hover:text-ice transition-colors" data-i18n="nav.about">О сервере</a>
+    <a href="#features" class="hover:text-ice transition-colors" data-i18n="nav.features">Преимущества</a>
+    <a href="#requirements" class="hover:text-ice transition-colors" data-i18n="nav.requirements">Требования</a>
+    <a href="#chieftains" class="hover:text-ice transition-colors" data-i18n="nav.chieftains">Хёвдинги</a>
+    <div class="lang-switch flex items-center gap-0.5 rounded-full border border-white/10 bg-white/5 p-1 w-fit" role="group" aria-label="Language / Язык">
+      <i data-lucide="languages" class="w-3.5 h-3.5 text-fg-muted ml-1.5 mr-0.5" aria-hidden="true"></i>
+      <button type="button" class="lang-btn rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors" data-lang-btn="ru" aria-pressed="true">RU</button>
+      <button type="button" class="lang-btn rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors" data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+    <a href="#form" class="inline-flex items-center justify-center gap-2 rounded-lg bg-ember px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-charcoal-deep" data-i18n="nav.cta">Подать заявку</a>
   </nav>
 </header>
 
@@ -276,37 +293,37 @@
         <div>
           <div class="rune-framed rune-framed-amber inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/5 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber mb-6">
             <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
-            Открыт набор альянсов и соло-игроков
+            <span data-i18n="hero.badge">Открыт набор альянсов и соло-игроков</span>
           </div>
 
-          <h1 class="text-metal font-display font-black uppercase leading-[1.05] text-4xl sm:text-5xl lg:text-6xl tracking-wide">
+          <h1 class="text-metal font-display font-black uppercase leading-[1.05] text-4xl sm:text-5xl lg:text-6xl tracking-wide" data-i18n-html="hero.title">
             Переходи на<br>кингдом #549
           </h1>
 
-          <p class="mt-6 text-base sm:text-lg text-fg-muted max-w-xl leading-relaxed">
+          <p class="mt-6 text-base sm:text-lg text-fg-muted max-w-xl leading-relaxed" data-i18n="hero.subtitle">
             Сильный сервер, активные KVK-битвы, отсутствие токса и чёткая стратегия развития. Твой новый дом в Viking Rise.
           </p>
 
           <div class="mt-9 flex flex-col sm:flex-row gap-4">
             <a href="#form" class="rune-framed rune-framed-amber inline-flex items-center justify-center gap-2 rounded-xl bg-ember py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
               <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
-              Подать заявку на миграцию
+              <span data-i18n="hero.cta_apply">Подать заявку на миграцию</span>
             </a>
             <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 backdrop-blur px-8 py-4 font-display font-semibold uppercase tracking-wider text-fg hover:border-ice/50 hover:text-ice transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
               <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
-              Наш Telegram
+              <span data-i18n="hero.cta_telegram">Наш Telegram</span>
             </a>
           </div>
 
           <div class="mt-10 flex flex-wrap gap-3 font-stat">
             <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-sm text-fg-muted">
-              <i data-lucide="swords" class="w-4 h-4 text-ice" aria-hidden="true"></i> Активные KVK
+              <i data-lucide="swords" class="w-4 h-4 text-ice" aria-hidden="true"></i> <span data-i18n="hero.badge_kvk">Активные KVK</span>
             </div>
             <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-sm text-fg-muted">
-              <i data-lucide="users" class="w-4 h-4 text-ice" aria-hidden="true"></i> Открыт приём альянсов
+              <i data-lucide="users" class="w-4 h-4 text-ice" aria-hidden="true"></i> <span data-i18n="hero.badge_alliances">Открыт приём альянсов</span>
             </div>
             <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 text-sm text-fg-muted">
-              <i data-lucide="shield-check" class="w-4 h-4 text-ice" aria-hidden="true"></i> Стабильное руководство
+              <i data-lucide="shield-check" class="w-4 h-4 text-ice" aria-hidden="true"></i> <span data-i18n="hero.badge_leadership">Стабильное руководство</span>
             </div>
           </div>
         </div>
@@ -322,37 +339,37 @@
   <section id="features" class="relative py-20">
     <div class="glass-panel frost-border max-w-6xl mx-auto rounded-3xl bg-charcoal/50 p-6 sm:p-10 lg:p-14">
       <div class="text-center mb-12">
-        <h2 class="text-metal font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide">Почему K549</h2>
+        <h2 class="text-metal font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide" data-i18n="features.title">Почему K549</h2>
         <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Why K549</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5" id="tilt-grid">
         <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="shield" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Справедливое распределение наград</p>
-          <p class="text-fg-muted text-sm mt-2">Адекватный совет сервера и прозрачная система управления.</p>
+          <p class="font-semibold text-fg" data-i18n="features.card1.title">Справедливое распределение наград</p>
+          <p class="text-fg-muted text-sm mt-2" data-i18n="features.card1.desc">Адекватный совет сервера и прозрачная система управления.</p>
         </div>
         <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="swords" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Активный KVK и PvP</p>
-          <p class="text-fg-muted text-sm mt-2">Никакого афк — регулярные войны и защита союзников.</p>
+          <p class="font-semibold text-fg" data-i18n="features.card2.title">Активный KVK и PvP</p>
+          <p class="text-fg-muted text-sm mt-2" data-i18n="features.card2.desc">Никакого афк — регулярные войны и защита союзников.</p>
         </div>
         <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="heart-handshake" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Поддержка при переходе</p>
-          <p class="text-fg-muted text-sm mt-2">Помогаем топ-альянсам и соло-бойцам адаптироваться на новом месте.</p>
+          <p class="font-semibold text-fg" data-i18n="features.card3.title">Поддержка при переходе</p>
+          <p class="text-fg-muted text-sm mt-2" data-i18n="features.card3.desc">Помогаем топ-альянсам и соло-бойцам адаптироваться на новом месте.</p>
         </div>
         <div class="tilt-card glass-panel card-border-ice rounded-2xl p-6">
           <div class="w-11 h-11 rounded-lg bg-ice/10 flex items-center justify-center mb-4"><i data-lucide="scroll-text" class="w-5 h-5 text-ice" aria-hidden="true"></i></div>
-          <p class="font-semibold text-fg">Чёткие правила сервера</p>
-          <p class="text-fg-muted text-sm mt-2">Запрет на внутренний грабёж и бессмысленный зерг клиринг.</p>
+          <p class="font-semibold text-fg" data-i18n="features.card4.title">Чёткие правила сервера</p>
+          <p class="text-fg-muted text-sm mt-2" data-i18n="features.card4.desc">Запрет на внутренний грабёж и бессмысленный зерг клиринг.</p>
         </div>
       </div>
 
       <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted"><i data-lucide="message-circle" class="w-4 h-4 text-amber" aria-hidden="true"></i>Живые чаты в игре, Telegram и Discord</div>
-        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted"><i data-lucide="book-open" class="w-4 h-4 text-amber" aria-hidden="true"></i>Гайды и советы по саморазвитию</div>
-        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted">🍌 Свои традиции</div>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted"><i data-lucide="message-circle" class="w-4 h-4 text-amber" aria-hidden="true"></i><span data-i18n="features.pill1">Живые чаты в игре, Telegram и Discord</span></div>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted"><i data-lucide="book-open" class="w-4 h-4 text-amber" aria-hidden="true"></i><span data-i18n="features.pill2">Гайды и советы по саморазвитию</span></div>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm text-fg-muted" data-i18n="features.pill3">🍌 Свои традиции</div>
       </div>
     </div>
   </section>
@@ -363,7 +380,7 @@
       <div class="grid lg:grid-cols-2 gap-12">
 
         <div>
-          <h2 class="text-metal font-display font-bold uppercase text-2xl sm:text-3xl tracking-wide">Требования для миграции</h2>
+          <h2 class="text-metal font-display font-bold uppercase text-2xl sm:text-3xl tracking-wide" data-i18n="requirements.title">Требования для миграции</h2>
           <p class="font-display text-fg-muted text-xs tracking-[0.3em] uppercase mt-2 mb-8">Requirements</p>
 
           <ul class="space-y-5">
@@ -373,62 +390,62 @@
                 <circle cx="24" cy="20" r="4"/>
                 <path d="M14 27 H34 M16 33 H32"/>
               </svg>
-              <span class="font-stat text-lg text-fg">Сообщите силу и очки убийства — подберём подходящее место</span>
+              <span class="font-stat text-lg text-fg" data-i18n="requirements.item1">Сообщите силу и очки убийства — подберём подходящее место</span>
             </li>
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 48 48" class="icon-neon icon-neon-amber mt-0.5" aria-hidden="true">
                 <path d="M8 41 L27 13" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
                 <path d="M23 17 C28 6 41 5 44 13 C47 21 37 28 26 25 C24 23 22 20 23 17 Z" fill="currentColor"/>
               </svg>
-              <span class="font-stat text-lg text-fg">Т5-войска — большой плюс, но не обязательное условие</span>
+              <span class="font-stat text-lg text-fg" data-i18n="requirements.item2">Т5-войска — большой плюс, но не обязательное условие</span>
             </li>
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 48 48" class="icon-neon icon-neon-amber mt-0.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
                 <path d="M24 42 V22 M24 22 L12 6 M24 22 L36 6"/>
               </svg>
-              <span class="font-stat text-lg text-fg">Готовность участвовать в KVK и голосовых чатах</span>
+              <span class="font-stat text-lg text-fg" data-i18n="requirements.item3">Готовность участвовать в KVK и голосовых чатах</span>
             </li>
           </ul>
 
           <div class="mt-10 rounded-2xl border border-white/10 bg-white/5 p-5">
             <div class="flex items-center gap-2 font-display font-bold uppercase text-sm tracking-wide text-ice mb-2">
-              <i data-lucide="users" class="w-4 h-4" aria-hidden="true"></i> Лидерам альянсов
+              <i data-lucide="users" class="w-4 h-4" aria-hidden="true"></i> <span data-i18n="requirements.leaders_title">Лидерам альянсов</span>
             </div>
-            <p class="text-fg-muted text-sm">Переносите альянс целиком? Напишите хёвдингам напрямую — обсудим перенос и распределение мест индивидуально.</p>
+            <p class="text-fg-muted text-sm" data-i18n="requirements.leaders_desc">Переносите альянс целиком? Напишите хёвдингам напрямую — обсудим перенос и распределение мест индивидуально.</p>
           </div>
         </div>
 
         <div>
-          <h3 class="font-display font-bold uppercase text-lg text-fg mb-1">Заявка на миграцию</h3>
-          <p class="text-fg-muted text-sm mb-6">Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊</p>
+          <h3 class="font-display font-bold uppercase text-lg text-fg mb-1" data-i18n="form.title">Заявка на миграцию</h3>
+          <p class="text-fg-muted text-sm mb-6" data-i18n="form.subtitle">Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊</p>
 
           <form id="migration-form" class="flex flex-col gap-5">
             <label class="block text-xs uppercase tracking-widest text-fg-muted">
-              Игровой ник <span aria-hidden="true" class="text-ember">*</span>
-              <input type="text" name="nickname" required aria-required="true" autocomplete="off" placeholder="например: Ragnar_K549"
+              <span data-i18n="form.label_nickname">Игровой ник</span> <span aria-hidden="true" class="text-ember">*</span>
+              <input type="text" name="nickname" required aria-required="true" autocomplete="off" data-i18n-placeholder="form.placeholder_nickname" placeholder="например: Ragnar_K549"
                 class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
             </label>
             <label class="block text-xs uppercase tracking-widest text-fg-muted">
-              Из какого вы сервера?
-              <input type="text" name="server" autocomplete="off" placeholder="например: 412"
+              <span data-i18n="form.label_server">Из какого вы сервера?</span>
+              <input type="text" name="server" autocomplete="off" data-i18n-placeholder="form.placeholder_server" placeholder="например: 412"
                 class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
             </label>
             <label class="block text-xs uppercase tracking-widest text-fg-muted">
-              Мощь и очки убийства (MGP / KP)
-              <input type="text" name="power" autocomplete="off" placeholder="например: 90M / 12M KP"
+              <span data-i18n="form.label_power">Мощь и очки убийства (MGP / KP)</span>
+              <input type="text" name="power" autocomplete="off" data-i18n-placeholder="form.placeholder_power" placeholder="например: 90M / 12M KP"
                 class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
             </label>
             <label class="block text-xs uppercase tracking-widest text-fg-muted">
-              Фермы и наличие T5
-              <input type="text" name="farms" autocomplete="off" placeholder="например: 3, T5 есть"
+              <span data-i18n="form.label_farms">Фермы и наличие T5</span>
+              <input type="text" name="farms" autocomplete="off" data-i18n-placeholder="form.placeholder_farms" placeholder="например: 3, T5 есть"
                 class="rune-framed rune-framed-ice mt-2 w-full rounded-lg border border-white/10 bg-charcoal-deep/60 py-3 text-fg placeholder:text-fg-muted/40 focus:outline-none focus:border-ice focus:ring-1 focus:ring-ice transition font-stat text-base">
             </label>
 
             <button type="submit" class="rune-framed rune-framed-amber mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-ember py-4 font-display font-bold uppercase tracking-wider text-charcoal-deep shadow-glow-ember hover:brightness-110 active:scale-[.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
               <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
-              Отправить заявку на трансфер
+              <span data-i18n="form.submit">Отправить заявку на трансфер</span>
             </button>
-            <p class="text-fg-muted text-xs text-center">* обязательное поле / * required field<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
+            <p class="text-fg-muted text-xs text-center" data-i18n-html="form.consent">* обязательное поле / * required field<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных</p>
           </form>
 
           <div id="form-result" hidden aria-live="polite" class="mt-6 rounded-xl border border-ember/40 bg-ember/10 p-5 text-sm"></div>
@@ -440,9 +457,9 @@
   <!-- Chieftains -->
   <section id="chieftains" class="relative py-20">
     <div class="glass-panel frost-border max-w-4xl mx-auto rounded-3xl bg-charcoal/50 p-6 sm:p-10 lg:p-14 text-center">
-      <h2 class="text-metal font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide">Хёвдинги K549</h2>
+      <h2 class="text-metal font-display font-bold uppercase text-3xl sm:text-4xl tracking-wide" data-i18n="chieftains.title">Хёвдинги K549</h2>
       <p class="font-display text-fg-muted text-xs sm:text-sm tracking-[0.3em] uppercase mt-2">Chieftains</p>
-      <p class="text-fg-muted mt-4 max-w-xl mx-auto">Свяжитесь напрямую — они ведут приём заявок и координируют миграцию.</p>
+      <p class="text-fg-muted mt-4 max-w-xl mx-auto" data-i18n="chieftains.desc">Свяжитесь напрямую — они ведут приём заявок и координируют миграцию.</p>
 
       <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="group glass-panel card-border-amber rounded-2xl p-8 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
@@ -450,7 +467,7 @@
             <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
           </div>
           <div class="font-display font-bold text-lg text-fg">21СаМец21</div>
-          <div class="text-xs uppercase tracking-widest text-amber mt-1">Хёвдинг · Приём заявок</div>
+          <div class="text-xs uppercase tracking-widest text-amber mt-1" data-i18n="chieftains.role1">Хёвдинг · Приём заявок</div>
           <div class="text-ice text-sm mt-3 inline-flex items-center gap-1.5 group-hover:underline"><i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>@Keypoint21</div>
         </a>
         <a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="group glass-panel card-border-amber rounded-2xl p-8 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
@@ -458,7 +475,7 @@
             <i data-lucide="shield" class="w-7 h-7 text-ice" aria-hidden="true"></i>
           </div>
           <div class="font-display font-bold text-lg text-fg">Кэтрин</div>
-          <div class="text-xs uppercase tracking-widest text-amber mt-1">Хёвдинг · Поддержка</div>
+          <div class="text-xs uppercase tracking-widest text-amber mt-1" data-i18n="chieftains.role2">Хёвдинг · Поддержка</div>
           <div class="text-ice text-sm mt-3 inline-flex items-center gap-1.5 group-hover:underline"><i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>@EvaZaltsman</div>
         </a>
       </div>
@@ -471,14 +488,14 @@
 <footer class="relative border-t border-white/5 px-5 sm:px-8 py-14">
   <div class="max-w-4xl mx-auto text-center">
     <div class="text-metal font-display font-bold uppercase tracking-widest mb-1 inline-block">K549 · Migration</div>
-    <p class="text-fg-muted text-sm mb-6">Чертог кингдома #549 — здесь начинается ваш новый поход.</p>
+    <p class="text-fg-muted text-sm mb-6" data-i18n="footer.tagline">Чертог кингдома #549 — здесь начинается ваш новый поход.</p>
     <div class="flex items-center justify-center gap-4">
       <a href="https://t.me/Keypoint21" target="_blank" rel="noopener" aria-label="Telegram: 21СаМец21"
         class="w-11 h-11 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-ice hover:border-ice/50 hover:shadow-glow-ice transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
         <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
       </a>
     </div>
-    <p class="text-fg-muted/60 text-xs mt-8">Неофициальный фан-сайт для сообщества K549 · не является официальным ресурсом Viking Rise</p>
+    <p class="text-fg-muted/60 text-xs mt-8" data-i18n="footer.disclaimer">Неофициальный фан-сайт для сообщества K549 · не является официальным ресурсом Viking Rise</p>
   </div>
 </footer>
 
@@ -705,6 +722,198 @@ try {
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // --- language switcher ---
+  var I18N = {
+    ru: {
+      'meta.title': 'K549 | MIGRATION — переходи на кингдом #549',
+      'meta.description': 'K549 · Migration — неофициальный фан-сайт сообщества кингдома #549 в Viking Rise. Сильный сервер, активные KVK, чёткая стратегия. Подай заявку на миграцию.',
+      'gate.title': 'Войти на K549',
+      'gate.enter_btn': 'Переступить порог',
+      'gate.hint': '🔊 Со звуком — на входе зазвучит музыка чертога',
+      'music.on': 'Включить музыку',
+      'music.off': 'Выключить музыку',
+      'nav.about': 'О сервере',
+      'nav.features': 'Преимущества',
+      'nav.requirements': 'Требования',
+      'nav.chieftains': 'Хёвдинги',
+      'nav.contact': 'Связь',
+      'nav.cta': 'Подать заявку',
+      'nav.menu_open': 'Открыть меню',
+      'hero.badge': 'Открыт набор альянсов и соло-игроков',
+      'hero.title': 'Переходи на<br>кингдом #549',
+      'hero.subtitle': 'Сильный сервер, активные KVK-битвы, отсутствие токса и чёткая стратегия развития. Твой новый дом в Viking Rise.',
+      'hero.cta_apply': 'Подать заявку на миграцию',
+      'hero.cta_telegram': 'Наш Telegram',
+      'hero.badge_kvk': 'Активные KVK',
+      'hero.badge_alliances': 'Открыт приём альянсов',
+      'hero.badge_leadership': 'Стабильное руководство',
+      'features.title': 'Почему K549',
+      'features.card1.title': 'Справедливое распределение наград',
+      'features.card1.desc': 'Адекватный совет сервера и прозрачная система управления.',
+      'features.card2.title': 'Активный KVK и PvP',
+      'features.card2.desc': 'Никакого афк — регулярные войны и защита союзников.',
+      'features.card3.title': 'Поддержка при переходе',
+      'features.card3.desc': 'Помогаем топ-альянсам и соло-бойцам адаптироваться на новом месте.',
+      'features.card4.title': 'Чёткие правила сервера',
+      'features.card4.desc': 'Запрет на внутренний грабёж и бессмысленный зерг клиринг.',
+      'features.pill1': 'Живые чаты в игре, Telegram и Discord',
+      'features.pill2': 'Гайды и советы по саморазвитию',
+      'features.pill3': '🍌 Свои традиции',
+      'requirements.title': 'Требования для миграции',
+      'requirements.item1': 'Сообщите силу и очки убийства — подберём подходящее место',
+      'requirements.item2': 'Т5-войска — большой плюс, но не обязательное условие',
+      'requirements.item3': 'Готовность участвовать в KVK и голосовых чатах',
+      'requirements.leaders_title': 'Лидерам альянсов',
+      'requirements.leaders_desc': 'Переносите альянс целиком? Напишите хёвдингам напрямую — обсудим перенос и распределение мест индивидуально.',
+      'form.title': 'Заявка на миграцию',
+      'form.subtitle': 'Расскажите нам о себе, чтобы мы подготовили для вас лучшее место 😊',
+      'form.label_nickname': 'Игровой ник',
+      'form.label_server': 'Из какого вы сервера?',
+      'form.label_power': 'Мощь и очки убийства (MGP / KP)',
+      'form.label_farms': 'Фермы и наличие T5',
+      'form.placeholder_nickname': 'например: Ragnar_K549',
+      'form.placeholder_server': 'например: 412',
+      'form.placeholder_power': 'например: 90M / 12M KP',
+      'form.placeholder_farms': 'например: 3, T5 есть',
+      'form.submit': 'Отправить заявку на трансфер',
+      'form.consent': '* обязательное поле<br>Нажимая на кнопку, вы соглашаетесь с условиями о персональных данных',
+      'chieftains.title': 'Хёвдинги K549',
+      'chieftains.desc': 'Свяжитесь напрямую — они ведут приём заявок и координируют миграцию.',
+      'chieftains.role1': 'Хёвдинг · Приём заявок',
+      'chieftains.role2': 'Хёвдинг · Поддержка',
+      'footer.tagline': 'Чертог кингдома #549 — здесь начинается ваш новый поход.',
+      'footer.disclaimer': 'Неофициальный фан-сайт для сообщества K549 · не является официальным ресурсом Viking Rise',
+      'result.header': 'Заявка на миграцию в K549 / Migration application to K549',
+      'result.nickname': 'Ник в игре',
+      'result.server': 'Сервер',
+      'result.power': 'Сила и очки убийства',
+      'result.farms': 'Фермы',
+      'result.title': 'Анкета готова',
+      'result.copy_hint': 'Скопируйте анкету и отправьте одному из хёвдингов в Telegram.',
+      'result.copy_btn': 'Копировать анкету',
+      'result.copied': 'Скопировано ✓',
+      'result.write_to': 'Написать',
+    },
+    en: {
+      'meta.title': 'K549 | MIGRATION — transfer to kingdom #549',
+      'meta.description': 'K549 · Migration — an unofficial fan site for the kingdom #549 community in Viking Rise. Strong server, active KVK, clear strategy. Apply for migration.',
+      'gate.title': 'Enter K549',
+      'gate.enter_btn': 'Cross the threshold',
+      'gate.hint': '🔊 With sound on — the hall’s music starts as you enter',
+      'music.on': 'Turn music on',
+      'music.off': 'Turn music off',
+      'nav.about': 'About the server',
+      'nav.features': 'Advantages',
+      'nav.requirements': 'Requirements',
+      'nav.chieftains': 'Chieftains',
+      'nav.contact': 'Contact',
+      'nav.cta': 'Apply now',
+      'nav.menu_open': 'Open menu',
+      'hero.badge': 'Alliances and solo players welcome',
+      'hero.title': 'Transfer to<br>kingdom #549',
+      'hero.subtitle': 'Strong server, active KVK battles, zero toxicity, and a clear growth strategy. Your new home in Viking Rise.',
+      'hero.cta_apply': 'Apply for migration',
+      'hero.cta_telegram': 'Our Telegram',
+      'hero.badge_kvk': 'Active KVK',
+      'hero.badge_alliances': 'Alliances welcome',
+      'hero.badge_leadership': 'Stable leadership',
+      'features.title': 'Why K549',
+      'features.card1.title': 'Fair reward distribution',
+      'features.card1.desc': 'A reasonable server council and a transparent management system.',
+      'features.card2.title': 'Active KVK and PvP',
+      'features.card2.desc': 'No AFK — regular wars and protection for allies.',
+      'features.card3.title': 'Support during the transfer',
+      'features.card3.desc': 'We help top alliances and solo players settle into their new home.',
+      'features.card4.title': 'Clear server rules',
+      'features.card4.desc': 'No internal looting, no pointless zerg-clearing.',
+      'features.pill1': 'Active chats in-game, on Telegram and Discord',
+      'features.pill2': 'Guides and tips for growth',
+      'features.pill3': '🍌 Our own traditions',
+      'requirements.title': 'Migration requirements',
+      'requirements.item1': 'Tell us your might and kill points — we’ll find you the right spot',
+      'requirements.item2': 'T5 troops are a big plus, but not required',
+      'requirements.item3': 'Willingness to join KVK and voice chats',
+      'requirements.leaders_title': 'For alliance leaders',
+      'requirements.leaders_desc': 'Moving your whole alliance? Message the chieftains directly — we’ll work out the transfer and placement individually.',
+      'form.title': 'Migration application',
+      'form.subtitle': 'Tell us about yourself so we can prepare the best spot for you 😊',
+      'form.label_nickname': 'In-game nickname',
+      'form.label_server': 'Which server are you from?',
+      'form.label_power': 'Might and kill points (MGP / KP)',
+      'form.label_farms': 'Farm accounts and T5 troops',
+      'form.placeholder_nickname': 'e.g. Ragnar_K549',
+      'form.placeholder_server': 'e.g. 412',
+      'form.placeholder_power': 'e.g. 90M / 12M KP',
+      'form.placeholder_farms': 'e.g. 3, has T5',
+      'form.submit': 'Submit transfer application',
+      'form.consent': '* required field<br>By clicking the button, you agree to the personal data terms',
+      'chieftains.title': 'Chieftains of K549',
+      'chieftains.desc': 'Reach out directly — they handle applications and coordinate the migration.',
+      'chieftains.role1': 'Chieftain · Applications',
+      'chieftains.role2': 'Chieftain · Support',
+      'footer.tagline': 'The hall of kingdom #549 — where your new journey begins.',
+      'footer.disclaimer': 'Unofficial fan site for the K549 community · not an official Viking Rise resource',
+      'result.header': 'Migration application to K549',
+      'result.nickname': 'Nickname',
+      'result.server': 'Server',
+      'result.power': 'Might & kill points',
+      'result.farms': 'Farm accounts',
+      'result.title': 'Application ready',
+      'result.copy_hint': 'Copy the application and send it to one of the chieftains on Telegram.',
+      'result.copy_btn': 'Copy application',
+      'result.copied': 'Copied ✓',
+      'result.write_to': 'Message',
+    },
+  };
+
+  var currentLang = 'ru';
+
+  function applyLanguage(lang){
+    if (!I18N[lang]) return;
+    currentLang = lang;
+    document.documentElement.lang = lang;
+
+    var titleEl = document.getElementById('page-title');
+    if (titleEl) titleEl.textContent = I18N[lang]['meta.title'];
+    var descEl = document.getElementById('page-description');
+    if (descEl) descEl.setAttribute('content', I18N[lang]['meta.description']);
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (I18N[lang][key] === undefined) return;
+      el.textContent = I18N[lang][key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if (I18N[lang][key] === undefined) return;
+      el.innerHTML = I18N[lang][key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      if (I18N[lang][key] === undefined) return;
+      el.setAttribute('placeholder', I18N[lang][key]);
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-aria-label');
+      if (I18N[lang][key] === undefined) return;
+      el.setAttribute('aria-label', I18N[lang][key]);
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === lang ? 'true' : 'false');
+    });
+
+    try { localStorage.setItem('k549-lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLanguage(btn.getAttribute('data-lang-btn')); });
+  });
+
+  var savedLang = null;
+  try { savedLang = localStorage.getItem('k549-lang'); } catch (e) {}
+  applyLanguage(savedLang === 'en' ? 'en' : 'ru');
+
   // --- audio gate ---
   var audio = document.getElementById('hall-music');
   var gate = document.getElementById('gate');
@@ -716,7 +925,7 @@ try {
     toggle.classList.remove('opacity-0','scale-75');
     toggle.classList.add('opacity-100','scale-100');
     toggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
-    toggle.setAttribute('aria-label', playing ? 'Выключить музыку' : 'Включить музыку');
+    toggle.setAttribute('aria-label', I18N[currentLang][playing ? 'music.off' : 'music.on']);
     toggleIcon.setAttribute('data-lucide', playing ? 'volume-2' : 'volume-x');
     if (window.lucide) lucide.createIcons();
   }
@@ -791,23 +1000,23 @@ try {
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var data = new FormData(form);
+    var t = I18N[currentLang];
     var text =
-      'Заявка на миграцию в K549 / Migration application to K549\n' +
-      'Ник в игре / Nickname: ' + data.get('nickname') + '\n' +
-      'Сервер / Server: ' + (data.get('server') || '—') + '\n' +
-      'Сила и очки убийства / Might & kill points: ' + (data.get('power') || '—') + '\n' +
-      'Фермы / Farm accounts: ' + (data.get('farms') || '—');
+      t['result.header'] + '\n' +
+      t['result.nickname'] + ': ' + data.get('nickname') + '\n' +
+      t['result.server'] + ': ' + (data.get('server') || '—') + '\n' +
+      t['result.power'] + ': ' + (data.get('power') || '—') + '\n' +
+      t['result.farms'] + ': ' + (data.get('farms') || '—');
 
     result.hidden = false;
     result.innerHTML =
-      '<h3 class="font-display font-bold uppercase tracking-wide text-fg mb-2">Анкета готова / Application ready</h3>' +
+      '<h3 class="font-display font-bold uppercase tracking-wide text-fg mb-2">' + t['result.title'] + '</h3>' +
       '<pre class="whitespace-pre-wrap break-words bg-charcoal-deep/60 rounded-lg p-4 text-fg-muted font-stat"></pre>' +
-      '<p class="text-fg-muted mt-3">Скопируйте анкету и отправьте одному из хёвдингов в Telegram.<br>' +
-      '<span class="italic">Copy the application and send it to one of the chieftains on Telegram.</span></p>' +
+      '<p class="text-fg-muted mt-3">' + t['result.copy_hint'] + '</p>' +
       '<div class="flex flex-wrap gap-2 mt-3">' +
-        '<button type="button" id="copy-btn" class="rounded-lg border border-ice/30 bg-ice/10 text-ice px-4 py-2 text-xs font-semibold hover:bg-ice/20 transition">Копировать анкету / Copy</button>' +
-        '<a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="rounded-lg border border-white/15 bg-white/5 text-fg px-4 py-2 text-xs font-semibold hover:border-ice/40 transition">Написать 21СаМец21</a>' +
-        '<a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="rounded-lg border border-white/15 bg-white/5 text-fg px-4 py-2 text-xs font-semibold hover:border-ice/40 transition">Написать Кэтрин</a>' +
+        '<button type="button" id="copy-btn" class="rounded-lg border border-ice/30 bg-ice/10 text-ice px-4 py-2 text-xs font-semibold hover:bg-ice/20 transition">' + t['result.copy_btn'] + '</button>' +
+        '<a href="https://t.me/Keypoint21" target="_blank" rel="noopener" class="rounded-lg border border-white/15 bg-white/5 text-fg px-4 py-2 text-xs font-semibold hover:border-ice/40 transition">' + t['result.write_to'] + ' 21СаМец21</a>' +
+        '<a href="https://t.me/EvaZaltsman" target="_blank" rel="noopener" class="rounded-lg border border-white/15 bg-white/5 text-fg px-4 py-2 text-xs font-semibold hover:border-ice/40 transition">' + t['result.write_to'] + ' Кэтрин</a>' +
       '</div>';
     result.querySelector('pre').textContent = text;
     result.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
@@ -816,7 +1025,7 @@ try {
       navigator.clipboard.writeText(text).then(function(){
         var btn = document.getElementById('copy-btn');
         var old = btn.textContent;
-        btn.textContent = 'Скопировано ✓';
+        btn.textContent = I18N[currentLang]['result.copied'];
         setTimeout(function(){ btn.textContent = old; }, 1800);
       });
     });
