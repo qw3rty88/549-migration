@@ -233,7 +233,7 @@
     </button>
   </div>
 
-  <nav id="mobile-menu" hidden class="lg:hidden border-t border-white/5 bg-charcoal-deep/95 backdrop-blur-lg px-5 py-4 flex flex-col gap-4 text-fg-muted">
+  <nav id="mobile-menu" hidden class="lg:hidden border-t border-white/5 bg-charcoal-deep/95 backdrop-blur-lg px-5 py-4 flex-col gap-4 text-fg-muted">
     <a href="#top" class="hover:text-ice transition-colors">О сервере</a>
     <a href="#features" class="hover:text-ice transition-colors">Преимущества</a>
     <a href="#requirements" class="hover:text-ice transition-colors">Требования</a>
@@ -286,7 +286,9 @@
           </div>
         </div>
 
-        <div id="emblem-3d" class="relative w-full aspect-square max-w-sm mx-auto" aria-hidden="true"></div>
+        <div class="relative w-full max-w-sm mx-auto" aria-hidden="true">
+          <img src="triquetra-emblem.webp" alt="" class="w-full h-auto drop-shadow-[0_0_40px_rgba(255,140,20,.35)]" width="1024" height="1024" loading="eager" decoding="async">
+        </div>
       </div>
     </div>
   </section>
@@ -667,120 +669,6 @@ try {
   }
   renderBg();
 
-  /* ---------- glowing glass rune emblem ---------- */
-  const emblemContainer = document.getElementById('emblem-3d');
-  const fallback = document.getElementById('rune-emblem-fallback');
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-  camera.position.set(0, 0.1, 6.2);
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  emblemContainer.appendChild(renderer.domElement);
-
-  scene.add(new THREE.AmbientLight(0x0c0e10, 0.5));
-  const key = new THREE.DirectionalLight(0x8fe9ff, 1.6);
-  key.position.set(2, 3, 3);
-  scene.add(key);
-  const rim = new THREE.DirectionalLight(0xff9a3d, 1.4);
-  rim.position.set(-2.5, -1, -2.5);
-  scene.add(rim);
-  const fill = new THREE.PointLight(0xffaa00, 1.1, 12);
-  fill.position.set(0, -1.5, 2.5);
-  scene.add(fill);
-
-  // Algiz rune extruded into real 3D glass
-  const shape = new THREE.Shape();
-  const w = 0.22;
-  shape.moveTo(-w, -2.1); shape.lineTo(w, -2.1); shape.lineTo(w, -0.35);
-  shape.lineTo(1.15, 1.65); shape.lineTo(0.78, 2.0); shape.lineTo(0, 0.55);
-  shape.lineTo(-0.78, 2.0); shape.lineTo(-1.15, 1.65); shape.lineTo(-w, -0.35);
-  shape.lineTo(-w, -2.1);
-
-  const runeGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.34, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 3 });
-  runeGeo.center();
-
-  // NOTE: MeshPhysicalMaterial's `transmission` needs a scene.environment (envMap) to
-  // refract anything - without one it renders as a flat grey blob. Skipping transmission
-  // entirely and leaning on emissive + clearcoat instead, so the glow is self-contained
-  // and never depends on an environment map being present.
-  const glass = new THREE.MeshPhysicalMaterial({
-    color: 0x1fb8d6,
-    metalness: 0,
-    roughness: 0.18,
-    clearcoat: 1,
-    clearcoatRoughness: 0.12,
-    transparent: true,
-    opacity: 0.62,
-    emissive: 0x36e0ff,
-    emissiveIntensity: 0.9,
-  });
-
-  const rune = new THREE.Mesh(runeGeo, glass);
-  scene.add(rune);
-
-  // fresnel-style rim glow: a slightly larger backside shell, additive-blended
-  const rimGlow = new THREE.Mesh(
-    runeGeo,
-    new THREE.MeshBasicMaterial({ color: 0xffaa00, transparent: true, opacity: 0.5, side: THREE.BackSide, blending: THREE.AdditiveBlending, depthWrite: false })
-  );
-  rimGlow.scale.set(1.12, 1.08, 1.4);
-  rune.add(rimGlow);
-
-  // soft additive glow halo behind the rune
-  function glowTexture() {
-    const c = document.createElement('canvas'); c.width = c.height = 256;
-    const ctx = c.getContext('2d');
-    const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-    g.addColorStop(0, 'rgba(140,220,255,0.55)');
-    g.addColorStop(0.5, 'rgba(255,170,0,0.18)');
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g; ctx.fillRect(0, 0, 256, 256);
-    return new THREE.CanvasTexture(c);
-  }
-  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture(), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
-  glow.scale.set(6.5, 6.5, 1);
-  glow.position.z = -0.5;
-  scene.add(glow);
-
-  function fit() {
-    const s = emblemContainer.clientWidth;
-    if (!s) return;
-    renderer.setSize(s, s);
-    camera.aspect = 1;
-    camera.updateProjectionMatrix();
-  }
-  fit();
-  new ResizeObserver(fit).observe(emblemContainer);
-  window.addEventListener('resize', fit);
-
-  fallback.style.display = 'none';
-
-  let tX = 0, tY = 0, cX = 0, cY = 0;
-  if (!reduceMotion) {
-    window.addEventListener('pointermove', function (e) {
-      tX = (e.clientX / window.innerWidth) * 2 - 1;
-      tY = (e.clientY / window.innerHeight) * 2 - 1;
-    }, { passive: true });
-  }
-
-  if (reduceMotion) {
-    renderer.render(scene, camera);
-  } else {
-    const emblemClock = new THREE.Clock();
-    (function animateEmblem() {
-      requestAnimationFrame(animateEmblem);
-      const t = emblemClock.getElapsedTime();
-      cX += (tX - cX) * 0.04;
-      cY += (tY - cY) * 0.04;
-      rune.rotation.y = t * 0.4 + cX * 0.4;
-      rune.rotation.x = cY * 0.2;
-      rune.position.y = Math.sin(t * 0.8) * 0.12;
-      renderer.render(scene, camera);
-    })();
-  }
 } catch (err) {
   // no WebGL / CDN blocked: page still fully works, just without the 3D/particle layer
 }
@@ -843,13 +731,17 @@ try {
   // --- mobile menu ---
   var menuToggle = document.getElementById('menu-toggle');
   var mobileMenu = document.getElementById('mobile-menu');
+  // note: the "hidden" attribute and a static "flex" class have equal CSS
+  // specificity, so Tailwind's .flex rule (loaded after the UA stylesheet)
+  // was winning and the menu stayed visible - toggle the "flex" class
+  // in lockstep with "hidden" instead of leaving it on permanently
   menuToggle.addEventListener('click', function(){
     var isHidden = mobileMenu.hasAttribute('hidden');
-    if (isHidden) { mobileMenu.removeAttribute('hidden'); menuToggle.setAttribute('aria-expanded','true'); }
-    else { mobileMenu.setAttribute('hidden',''); menuToggle.setAttribute('aria-expanded','false'); }
+    if (isHidden) { mobileMenu.removeAttribute('hidden'); mobileMenu.classList.add('flex'); menuToggle.setAttribute('aria-expanded','true'); }
+    else { mobileMenu.setAttribute('hidden',''); mobileMenu.classList.remove('flex'); menuToggle.setAttribute('aria-expanded','false'); }
   });
   mobileMenu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ mobileMenu.setAttribute('hidden',''); menuToggle.setAttribute('aria-expanded','false'); });
+    a.addEventListener('click', function(){ mobileMenu.setAttribute('hidden',''); mobileMenu.classList.remove('flex'); menuToggle.setAttribute('aria-expanded','false'); });
   });
 
   // --- 3D tilt on feature cards ---
